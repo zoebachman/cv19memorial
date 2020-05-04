@@ -1,6 +1,18 @@
 <html lang="en">
+
 <head>
-    <% include ../helpers/head %>
+  <% include ../helpers/head %>
+  <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+  <!--     <script src="https://unpkg.com/aframe-simple-sun-sky@^1.2.2/simple-sun-sky.js"></script> -->
+  <script src="https://unpkg.com/aframe-template-component@3.x.x/dist/aframe-template-component.min.js"></script>
+  <script src="https://unpkg.com/aframe-layout-component@4.x.x/dist/aframe-layout-component.min.js"></script>
+  <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
+  <script src="https://cdn.rawgit.com/matthewbryancurtis/aframe-star-system-component/db4f1030/index.js"></script>
+  <script src="https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script>
+  <script src="https://unpkg.com/aframe-dust-component@^1.0.4/aframe-dust-component.js"></script>
+  <!--     <script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v4.1.1/dist/aframe-extras.min.js"></script> -->
+  <script src="../components/extended-wasd-controls.js"></script>
+  <script src="../components/simple-sun-sky.js"></script>
 </head>
 
 <body>
@@ -8,18 +20,61 @@
   <!-- the classes 'page-header' and 'btn btn-default' create bootstrap components.  -->
   <!-- Check out more components here: http://getbootstrap.com/components/ -->
   <div class="page-header">
-    <h1>YOYO web apps are so cool</h1>
+
+    <h1>cv19 memorial</h1>
   </div>
+  <!--   will need to take out fog for nighttime   -->
+  <a-scene vr-mode-ui="enabled: false" cursor="rayOrigin: mouse" fog="type: linear; color: #d7d7fe">
+    <a-assets>
+      <img id="buddhist" crossorigin="anonymous"
+        src="https://cdn.glitch.com/4794bdc1-930a-41bb-829f-0bb44b2820ed%2Fbuddhist_altar.jpg?v=1587420438903" />
 
-  <p id="demo">
-    This is me testing out a lil html file
-  </p>
+      <img id="grandma" crossorigin="anonymous"
+        src="https://cdn.glitch.com/4794bdc1-930a-41bb-829f-0bb44b2820ed%2FIMG_0400.JPG?v=1587420494574" />
+      <img id="earth" crossorigin="anonymous"
+        src="https://cdn.glitch.com/4794bdc1-930a-41bb-829f-0bb44b2820ed%2Fearth_no_background.jpg?v=1587420501196" />
+      <img id="ss-obit" crossorigin="anonymous"
+        src="https://cdn.glitch.com/4794bdc1-930a-41bb-829f-0bb44b2820ed%2Fss-obit.png?v=1587657815572" />
 
-  <button class="btn btn-default" type="button" onclick="myFunction()">
-    Try it
-  </button>
+      <!-- will this work for images? try like this than do a sphere-->
+      <!--   how can I change the material each time? and pull data to do so?       -->
+      <!--  anyways, this is a template        -->
+      <script id="mem-sphere" type="text/html">
+       <a-entity class="link"
+         geometry="primitive: sphere; radius: 2;"
+         material="shader: flat; side: double; src: ${mat};"
+         sound="on: click; src: #click-sound"></a-entity>
+     </script>
+    </a-assets>
 
-  <div id="doge-image"/>
+    <a-entity id="memorials" layout="type: cube; angle: 45; radius: 10;" position="-3 -1 -4">
+      <a-entity template="src: #mem-sphere" data-mat="#buddhist"></a-entity>
+      <a-entity template="src: #mem-sphere" data-mat="#grandma"></a-entity>
+      <a-entity template="src: #mem-sphere" data-mat="#earth"></a-entity>
+    </a-entity>
+
+    <!--    background color    -->
+    <!--       <a-sky color="#87ceeb"></a-sky> -->
+    <a-simple-sun-sky sun-position="1 0.1 0" light-color="#668ff9" dark-color="#668ff9" fog-color="#d7d7fe">
+    </a-simple-sun-sky>
+    <a-entity light="type: ambient; color: #FFF"></a-entity>
+    <a-entity light="type: directional; color: #FFF; intensity: 0.6" position="0.7 0.4 -1"></a-entity>
+
+    <!--  night sky      -->
+    <!--       <a-sky color="black"></a-sky> -->
+    <!--  stars - kind of like them there all the time      -->
+    <a-entity star-system></a-entity>
+
+
+    <a-entity id="camera" camera position="0 1.6 0"
+      extended-wasd-controls="flyEnabled: true; turnEnabled: true; lookEnabled: true; maxLookAngle: 60;">
+    </a-entity>
+  </a-scene>
+
+
+  <div class="page-footer">
+    <% include ../helpers/navbar %>
+  </div>
 
 </body>
 
