@@ -1,24 +1,164 @@
 <html lang="en">
+  <head>
+    <meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link type="text/css" rel="stylesheet" href="/css/three.css">
+		<style>
+			body {
+				background-image: linear-gradient(#68BBE3 50%, #f5B1D4 100%);
+			}
+			.testimonial {
+				border-radius: 50%;
+    		behavior: url(PIE.htc); /* remove if you don't care about IE8 */
+				width: 200px;
+				height: 200px;
+				overflow: hidden;
+			}
+			.testimonialContainer {
+				box-shadow: 0px 0px 100px rgba(255,255,153,0.95);
+				border: 1px solid rgba(255,255,153,0.25);
+			}
+			.testimonialImage {
+				background-position: center;
+				background-size: cover;
+				background-repeat: no-repeat;
+				-webkit-filter: blur(10px);
+			  -moz-filter: blur(10px);
+			  -o-filter: blur(10px);
+			  -ms-filter: blur(10px);
+			  filter: blur(10px);
+			}
+			.testimonialImage:hover {
+				-webkit-filter: blur(0px);
+				-moz-filter: blur(0px);
+				-o-filter: blur(0px);
+				-ms-filter: blur(0px);
+				filter: blur(0px);
+			}
+			#cursorTextContainer {
+				position: absolute;
+				visibility: hidden;
+				z-index: 1;
+				color: #ffffff;
+				text-shadow: 0px 0px 8px #000000;
+			}
+		</style>
+    <% include ../helpers/head %>
+  </head>
+  <body>
+    <div class="page-header">
+      <h1>cv19 memorial</h1>
+    </div>
+    <div id="container">
+			<p id="cursorTextContainer"></p>
+		</div>
+    <div class="page-footer">
+      <% include ../helpers/navbar %>
+    </div>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script type="module">
 
-<head>
-  <% include ../helpers/head %>
-  <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+      import * as THREE from '/js/three/build/three.module.js';
 
-</head>
+      import { TrackballControls } from '/js/three/jsm/controls/TrackballControls.js';
+      import { CSS3DRenderer, CSS3DSprite } from '/js/three/jsm/renderers/CSS3DRenderer.js';
 
-<body>
+      var camera, scene, renderer;
+      var controls;
 
-  <!-- the classes 'page-header' and 'btn btn-default' create bootstrap components.  -->
-  <!-- Check out more components here: http://getbootstrap.com/components/ -->
-  <div class="page-header">
+      var particlesTotal = 50;
+      var objects = [];
 
-    <h1>cv19 memorial</h1>
-  </div>
+      var toolTipTextContainer = document.getElementById("cursorTextContainer");
+      var sceneContainer = document.getElementById("container");
 
-  <div class="page-footer">
-    <% include ../helpers/navbar %>
-  </div>
+      init();
+      animate();
 
-</body>
+      window.onload = function() {
+        sceneContainer.addEventListener("mouseover", function (event) {
+          onTestimonialMouseIn(event);
+        });
+        sceneContainer.addEventListener("mouseout", function (event) {
+          onTestimonialMouseOut(event);
+        });
+      }
 
+      function init() {
+        camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 5000 );
+        camera.position.set( 600, 400, 1500 );
+        camera.lookAt( 0, 0, 0 );
+
+        scene = new THREE.Scene();
+
+        for ( var i = 0; i < particlesTotal; i ++ ) {
+          var testimonial = document.createElement('div');
+          testimonial.className = 'testimonial testimonialContainer';
+          var image = document.createElement('div');
+          image.className = 'testimonial testimonialImage';
+          image.style.backgroundImage = 'url(/images/portraits/image_0112_mirror.jpg)';
+
+          var text = document.createElement('span');
+          text.innerHTML = "Jane Doe • 12/04/58 - 12/05/20"
+          text.className = 'tooltiptext';
+
+          testimonial.appendChild(image);
+          testimonial.appendChild(text);
+
+          var object = new CSS3DSprite(testimonial);
+          object.position.x = Math.random() * 4000 - 2000,
+          object.position.y = Math.random() * 4000 - 2000,
+          object.position.z = Math.random() * 4000 - 2000;
+          scene.add( object );
+
+          objects.push( object );
+        }
+
+        renderer = new CSS3DRenderer();
+        renderer.setSize( window.innerWidth, window.innerHeight );
+        sceneContainer.appendChild( renderer.domElement );
+
+        controls = new TrackballControls( camera, renderer.domElement );
+
+        window.addEventListener( 'resize', onWindowResize, false );
+
+      }
+
+      function onWindowResize() {
+
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+
+        renderer.setSize( window.innerWidth, window.innerHeight );
+
+      }
+
+      function animate() {
+        requestAnimationFrame( animate );
+
+        controls.update();
+
+        renderer.render( scene, camera );
+
+      }
+
+      function onTestimonialMouseIn(evt) {
+        if(evt.target &&  evt.target.className == "testimonial testimonialImage"){
+          var testimonialContainer = evt.target.parentNode;
+          var testimonialText = testimonialContainer.childNodes[1];
+
+          toolTipTextContainer.innerHTML = testimonialText.innerHTML;
+          toolTipTextContainer.style.top = evt.clientY + "px";
+          toolTipTextContainer.style.left = evt.clientX + "px";
+          toolTipTextContainer.style.visibility = "visible";
+        }
+      }
+
+      function onTestimonialMouseOut(evt) {
+        if(evt.target &&  evt.target.className == "testimonial testimonialImage"){
+          toolTipTextContainer.innerHTML = "";
+        }
+      }
+    </script>
+  </body>
 </html>
