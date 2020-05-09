@@ -8,13 +8,13 @@
 				background-image: linear-gradient(#68BBE3 50%, #f5B1D4 100%);
 			}
 			.testimonial {
-				border-radius: 50%;
     		behavior: url(PIE.htc); /* remove if you don't care about IE8 */
 				width: 200px;
 				height: 200px;
 				overflow: hidden;
 			}
 			.testimonialContainer {
+        border-radius: 50%;
 				box-shadow: 0px 0px 100px rgba(255,255,153,0.95);
 				border: 1px solid rgba(255,255,153,0.25);
 			}
@@ -38,9 +38,18 @@
 			#cursorTextContainer {
 				position: absolute;
 				visibility: hidden;
+        font-size: 14px;
 				z-index: 1;
 				color: #ffffff;
 				text-shadow: 0px 0px 8px #000000;
+			}
+      #fadeScreen {
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				background-color: rgba(0, 0, 0, 0);
+				z-index: 1;
+				visibility: hidden;
 			}
 		</style>
     <% include ../helpers/head %>
@@ -49,8 +58,9 @@
     <div class="page-header">
       <h1>cv19 memorial</h1>
     </div>
+    <div id="fadeScreen"></div>
+    <p id="cursorTextContainer"></p>
     <div id="container">
-			<p id="cursorTextContainer"></p>
 		</div>
     <div class="page-footer">
       <% include ../helpers/navbar %>
@@ -61,6 +71,7 @@
       import * as THREE from '/js/three/build/three.module.js';
 
       import { TrackballControls } from '/js/three/jsm/controls/TrackballControls.js';
+      import { TWEEN } from '/js/three/jsm/libs/tween.module.min.js';
       import { CSS3DRenderer, CSS3DSprite } from '/js/three/jsm/renderers/CSS3DRenderer.js';
 
       var camera, scene, renderer;
@@ -71,6 +82,7 @@
 
       var toolTipTextContainer = document.getElementById("cursorTextContainer");
       var sceneContainer = document.getElementById("container");
+      var fadeToDiv = document.getElementById("fadeScreen");
 
       init();
       animate();
@@ -81,6 +93,9 @@
         });
         sceneContainer.addEventListener("mouseout", function (event) {
           onTestimonialMouseOut(event);
+        });
+        sceneContainer.addEventListener("click", function (event) {
+          onTestimonialClick(event);
         });
       }
 
@@ -121,7 +136,7 @@
         controls = new TrackballControls( camera, renderer.domElement );
 
         window.addEventListener( 'resize', onWindowResize, false );
-
+        console.log(camera.position);
       }
 
       function onWindowResize() {
@@ -137,7 +152,7 @@
         requestAnimationFrame( animate );
 
         controls.update();
-
+        TWEEN.update();
         renderer.render( scene, camera );
 
       }
@@ -159,6 +174,47 @@
           toolTipTextContainer.innerHTML = "";
         }
       }
+
+      function onTestimonialClick(evt) {
+        if(evt.target &&  evt.target.className == "testimonial testimonialImage"){
+          var testimonialContainer = evt.target.parentNode;
+          var testimonialIndex = Array.from(testimonialContainer.parentElement.children).indexOf(testimonialContainer);
+
+					testimonialTransition(objects[testimonialIndex]);
+        }
+      }
+
+			function testimonialTransition(testimonial) {
+				var position = controls.target;
+				var cam = camera.position;
+				var target = testimonial.position;
+				var xy_tween = new TWEEN.Tween(position).to(target, 500);
+				var z_tween = new TWEEN.Tween(cam).to(target, 1000);
+				var transitionOpacity = {percentage: 0};
+				var fadeTween = new TWEEN.Tween(transitionOpacity).to({percentage: 1}, 1100);
+
+				xy_tween.onUpdate(function(){
+				  controls.target = position;
+				});
+
+				xy_tween.onComplete(function(){
+					console.log("starting z tween");
+				  z_tween.start();
+					fadeTween.start();
+				});
+
+				z_tween.onUpdate(function(){
+				  camera.position.z = cam.z;
+				});
+
+				fadeTween.onUpdate(function(){
+				  fadeToDiv.style.visibility = 'visible';
+					console.log(transitionOpacity);
+					fadeToDiv.style.backgroundColor = 'rgba(0, 0, 0, ' + transitionOpacity.percentage + ')';
+				});
+
+				xy_tween.start();
+			}
     </script>
   </body>
 </html>
