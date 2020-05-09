@@ -51,6 +51,14 @@
 				z-index: 1;
 				visibility: hidden;
 			}
+      #close_btn {
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 1% 0% 0% 1%;
+        width: 2%;
+				visibility: hidden;
+      }
 		</style>
     <% include ../helpers/head %>
   </head>
@@ -58,7 +66,9 @@
     <div class="page-header">
       <h1>cv19 memorial</h1>
     </div>
-    <div id="fadeScreen"></div>
+    <div id="fadeScreen">
+      <image src="images/icons/close_btn.png" id="close_btn">
+    </div>
     <p id="cursorTextContainer"></p>
     <div id="container">
 		</div>
@@ -83,6 +93,7 @@
       var toolTipTextContainer = document.getElementById("cursorTextContainer");
       var sceneContainer = document.getElementById("container");
       var fadeToDiv = document.getElementById("fadeScreen");
+      var closeBtn = document.getElementById("close_btn");
 
       init();
       animate();
@@ -96,6 +107,9 @@
         });
         sceneContainer.addEventListener("click", function (event) {
           onTestimonialClick(event);
+        });
+        closeBtn.addEventListener("click", function (event) {
+          fadeModal("out");
         });
       }
 
@@ -180,40 +194,63 @@
           var testimonialContainer = evt.target.parentNode;
           var testimonialIndex = Array.from(testimonialContainer.parentElement.children).indexOf(testimonialContainer);
 
-					testimonialTransition(objects[testimonialIndex]);
+					beginTestimonialTransition(objects[testimonialIndex]);
         }
       }
 
-			function testimonialTransition(testimonial) {
+      function beginTestimonialTransition(testimonial) {
 				var position = controls.target;
-				var cam = camera.position;
 				var target = testimonial.position;
-				var xy_tween = new TWEEN.Tween(position).to(target, 500);
-				var z_tween = new TWEEN.Tween(cam).to(target, 1000);
-				var transitionOpacity = {percentage: 0};
-				var fadeTween = new TWEEN.Tween(transitionOpacity).to({percentage: 1}, 1100);
+				var tween = new TWEEN.Tween(position).to(target, 500);
 
-				xy_tween.onUpdate(function(){
+				tween.onUpdate(function(){
 				  controls.target = position;
 				});
 
-				xy_tween.onComplete(function(){
-					console.log("starting z tween");
-				  z_tween.start();
-					fadeTween.start();
+				tween.onComplete(function(){
+				  zoomTestimonial("in", target);
+					fadeModal("in");
 				});
 
-				z_tween.onUpdate(function(){
-				  camera.position.z = cam.z;
+				tween.start();
+			}
+
+			function zoomTestimonial(direction, target) {
+				var cam = camera.position;
+				var target =  direction == "in" ? target : { x: target.x, y: target.y, z: 1500 } ;
+				var zTween = new TWEEN.Tween(cam).to(target, 1000);
+
+				zTween.onUpdate(function(){
+					camera.position.z = cam.z;
 				});
+
+				zTween.start();
+			}
+
+			function fadeModal(direction) {
+				var currentOpacity = { percentage : direction == "in" ? 0 : 1 };
+				var transitionOpacity = { percentage : direction == "in" ? 1 : 0 };
+				var fadeTween = new TWEEN.Tween(currentOpacity).to(transitionOpacity, 1100);
 
 				fadeTween.onUpdate(function(){
-				  fadeToDiv.style.visibility = 'visible';
-					console.log(transitionOpacity);
-					fadeToDiv.style.backgroundColor = 'rgba(0, 0, 0, ' + transitionOpacity.percentage + ')';
+					fadeToDiv.style.backgroundColor = 'rgba(0, 0, 0, ' + currentOpacity.percentage + ')';
 				});
 
-				xy_tween.start();
+				if (direction == "in") {
+					fadeToDiv.style.visibility = 'visible';
+					fadeTween.start();
+					fadeTween.onComplete(function() {
+						closeBtn.style.visibility = 'visible';
+					});
+
+				} else {
+					closeBtn.style.visibility = 'hidden';
+					zoomTestimonial("out", camera);
+					fadeTween.start();
+					fadeTween.onComplete(function() {
+						fadeToDiv.style.visibility = 'hidden';
+					});
+				}
 			}
     </script>
   </body>
