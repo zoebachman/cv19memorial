@@ -203,6 +203,8 @@
 				var target = testimonial.position;
 				var tween = new TWEEN.Tween(position).to(target, 500);
 
+        toolTipTextContainer.innerHTML = "";
+
 				tween.onUpdate(function(){
 				  controls.target = position;
 				});
