@@ -1,6 +1,6 @@
 {
-  "name": "Build Your First Webapp",
-  "description": "A barebones Node.js app using Express 4",
+  "name": "cv19 memorial",
+  "description": "A site to remember those impacted by cv19",
   "repository": "",
   "logo": "",
   "keywords": ["node", "express", "static"],
