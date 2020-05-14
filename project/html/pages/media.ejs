@@ -6,7 +6,21 @@
 
 <body>
   <div class="page-header">
-    <% include ../helpers/navbar %>
+    <% include ../helpers/menu %>
+  </div>
+
+  <div class="container"></div>
+  <% mediaItems.forEach(function(item) { %>
+  <div class="card" style="width: 18rem;">
+    <!-- <img src="IMG VARIABLE" class="card-img-top" alt="ALT VARIABLE"> -->
+    <div class="card-body">
+      <h5 class="card-title"><%= item.title %></h5>
+      <p class="card-text"><%= item.content %></p>
+      <p class="card-date"><%= item.date %></p>
+    </div>
+  </div>
+
+  <%}); %>
   </div>
 
 
