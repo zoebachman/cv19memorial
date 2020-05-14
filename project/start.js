@@ -24,6 +24,14 @@ app.get('/form', function(request, response) {
   response.render('pages/form');
 });
 
+app.get('/healingvoices', function(request, response) {
+  response.render('pages/healingvoices');
+});
+
+app.get('/media', function(request, response) {
+  response.render('pages/media');
+});
+
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });
