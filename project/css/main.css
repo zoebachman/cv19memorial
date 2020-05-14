@@ -14,3 +14,9 @@ p {
   font-size: 30px;
 }
 
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, 33%);
+  grid-template-rows: repeat(3, 33%);
+}
+
