@@ -1,0 +1,32 @@
+{
+    "media items": [
+        {
+            "title": "Creating Historic Memory",
+            "image": "..",
+            "alt-text": "Gif of newspaper article",
+            "content": "Reforma, a top Mexican newspaper, published in its digital and printed versions a story on cv19memorial",
+            "date": "April 17, 2020"
+        },
+        {
+            "title": "Mileno TV Interview",
+            "image": "..",
+            "alt-text": "Gif of COVID-19 News Report",
+            "content": "Mexican national television broadcasted cv19memorial's mission and story.",
+            "date": "April 15, 2020"
+        },
+        {
+            "title": "RuidoEnLaRed Interview",
+            "image": "..",
+            "alt-text": "Gif of radio interview",
+            "content": "RuidoEnLaRed, a digital-first news organization made a fantastic video explaining what cv19memorial is.",
+            "date": "April 14, 2020"
+        },
+        {
+            "title": "Article on PieDePágina",
+            "image": "..",
+            "alt-text": "Gif of newspaper article",
+            "content": "An article on the award-winning Mexican media outlet, PieDePágina",
+            "date": "April 13, 2020"
+        }
+    ]
+}
