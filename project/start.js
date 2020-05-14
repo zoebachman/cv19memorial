@@ -7,7 +7,11 @@ var fs = require('fs');
 
 app.set('port', (process.env.PORT || 5000));
 
-app.use(express.static(__dirname));
+// was causing wonkiness but now seems fine
+app.use(express.static(__dirname)); 
+
+// getting image files
+app.use(express.static('images')); 
 
 // views is directory for all template files
 app.set('views', __dirname + '/html');
@@ -43,7 +47,7 @@ app.get('/media', function (request, response) {
   response.render('pages/media', {
     mediaItems: mediaItems
   });
-  console.log(mediaItems);
+  // console.log(mediaItems);
 });
 
 app.listen(app.get('port'), function () {
