@@ -1,10 +1,20 @@
  
 
 <!-- use node to get img files -->
-<div class="card" style="width: 18rem;">
+<!-- <div class="card" style="width: 18rem;">
     <img src="IMG VARIABLE" class="card-img-top" alt="ALT VARIABLE">
     <div class="card-body">
       <h5 class="card-title">TITLE VARIABLE</h5>
       <p class="card-text">CONTENT VARIABLE</p>
+    </div>
+  </div> -->
+
+
+  <div class="card" style="width: 18rem;">
+    <img src="<%= item.image %>" class="card-img-top" alt="<%= item.alt %>">
+    <div class="card-body">
+      <h5 class="card-title"><%= item.title %></h5>
+      <p class="card-text"><%= item.content %></p>
+      <p class="card-date"><%= item.date %></p>
     </div>
   </div>
