@@ -11,7 +11,7 @@
   <div class="container"></div>
   <% hvItems.forEach(function(item) { %>
   <div class="card" style="width: 18rem;">
-    <!-- <img src="IMG VARIABLE" class="card-img-top" alt="ALT VARIABLE"> -->
+    <img src="<%= item.image %>" class="card-img-top" alt="<%= item.alt %>">
     <div class="card-body">
       <h5 class="card-title"><%= item.title %></h5>
       <p class="card-text"><%= item.content %></p>
