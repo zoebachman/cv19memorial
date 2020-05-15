@@ -1,39 +1,76 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link href='/fonts/stylesheet.css' rel='stylesheet' type='text/css'>
 		<style>
 			body {
 				background: radial-gradient(#e2dbfd, #c3dcfd 70%);
 			}
-      .menu-bar {
+      .header-item{
+        position: fixed;
+        margin-top: 2%;
+        z-index: 999;
+        font-family: freightsans_proSBdIt;
+        color: #426282;
+        cursor: default;
+      }
+      #mainHeader {
+        margin-left: 4%;
+        top: 0;
+        left: 0;
+      }
+      #menu-container {
+        margin-right: 4%;
+        top: 0;
+        right: 0;
+        text-align: right;
+      }
+      #menu-container:hover .menu-content {
+        display: block;
+      }
+      .menu-content {
+        font-family: freightsans_promedium_italic;
+        display: none;
+      }
+      .menu-content a {
+        color: #426282;
+        padding-top: 16px;
+        display: block;
+      }
+      .menu-content a:hover {
+        color: inherit;
+        text-decoration: none;
+      }
+      .page-footer {
+        position: fixed;
+        bottom:0;
+        left: 0;
+        width: 100%;
+        height: 13%;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-      }
-      .page-header{
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 7%;
         z-index: 999;
+        cursor: default;
       }
-      .left-item {
-        padding-left: 3%;
-      }
-      .right-item {
-        padding-right: 3%;
-      }
-      #testimoneyBtn {
+      #testimonyBtn {
+        border-radius: 2%;
         background-color: rgba(255, 255, 255, .5);
-        width: 10%;
-        padding: .5% 0%;
+        width: 200px;
+        padding: 13px 0px;
         color: #426282;
-        font-size: 90%;
         text-align: center;
-        margin-left: 3%;
+        margin-left: 4%;
+        font-family: freightsans_proSBdIt;
+      }
+      #socials {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 180px;
+        margin-right: 4%;
       }
 			.testimonial {
     		behavior: url(PIE.htc); /* remove if you don't care about IE8 */
@@ -67,6 +104,7 @@
 			#cursorTextContainer {
 				position: absolute;
 				visibility: hidden;
+        font-family: freightsans_promedium_italic;
         font-size: 14px;
 				z-index: 1;
 				color: #ffffff;
@@ -88,28 +126,32 @@
         width: 3%;
 				visibility: hidden;
       }
-      .page-footer {
-        position: fixed;
-        bottom:0;
-        left: 0;
-        width: 100%;
-        height: 7%;
-        z-index: 999;
-      }
 		</style>
     <% include ../helpers/head %>
   </head>
   <body>
-    <div class="menu-bar page-header">
-      <div id="mainHeader" class="left-item">CV19 Memorial</div>
-      <div class="right-item">menu</div>
-      <image src="images/icons/close_btn.png" id="close_btn">
+    <div id="mainHeader" class="header-item">cv19memorial</div>
+    <div id="menu-container" class="header-item">
+      <div id="menu-btn">menu</div>
+      <div class="menu-content">
+        <a href="#">about</a>
+        <a href="#">healing voices</a>
+        <a href="#">media</a>
+        <hr>
+        <a href="#" style="padding-top:0px" >español</a>
+      </div>
     </div>
-    <div class="menu-bar page-footer">
-      <div id="testimoneyBtn">Submit your testimony</div>
-      <div class="right-item">Socials</div>
+    <div class="page-footer">
+      <div id="testimonyBtn">Submit your testimony</div>
+      <div id="socials">
+        <a href="https://twitter.com/memorialcv19"><img src="/images/icons/twitter_icon.png"></a>
+        <a href="https://www.facebook.com/cv19memorial"><img src="/images/icons/facebook_icon.png"></a>
+        <a href="https://www.instagram.com/cv19memorial/"><img src="/images/icons/insta_icon.png"></a>
+        <a href="mailto:info@cv19memorial.org"><img src="/images/icons/mail_icon.png"></a>
+      </div>
     </div>
     <div id="fadeScreen">
+      <image src="images/icons/close_btn.png" id="close_btn">
     </div>
     <p id="cursorTextContainer"></p>
     <div id="container">
@@ -138,7 +180,6 @@
       var sceneContainer = document.getElementById("container");
       var fadeToDiv = document.getElementById("fadeScreen");
       var closeBtn = document.getElementById("close_btn");
-      var mainHeader = document.getElementById("mainHeader");
 
       init();
       animate();
@@ -165,37 +206,10 @@
 
         scene = new THREE.Scene();
 
-        for ( var i = 0; i < particlesTotal; i ++ ) {
-          var testimonial = document.createElement('div');
-          testimonial.className = 'testimonial testimonialContainer';
-
-          var image = document.createElement('div');
-          image.className = 'testimonial testimonialImage';
-          image.style.backgroundImage = 'url(/images/portraits/image_0111_mirror.jpg)';
-
-          var text = document.createElement('span');
-          text.innerHTML = "Jane Doe • 12/04/58 - 12/05/20";
-          text.className = 'tooltiptext';
-
-          testimonial.appendChild(image);
-          testimonial.appendChild(text);
-
-          var object = new CSS3DSprite(testimonial);
-          object.position.x = Math.random() * 4000 - 2000,
-          object.position.y = Math.random() * 4000 - 2000,
-          object.position.z = Math.random() * 4000 - 2000;
-          scene.add( object );
-
-          objects.push( object );
-
-          var bubbleDirection = {
-            x : (Math.random() * .6) - .4,
-            y : (Math.random() * .6) - .4,
-            z : (Math.random() * .6) - .4
-          }
-
-          animationDirections.push(bubbleDirection);
-        }
+        $.ajax({
+          url: '/data/cv19memorial _english_responses.csv',
+          dataType: 'text',
+        }).done(createTestimonial);
 
         renderer = new CSS3DRenderer();
         renderer.setSize( window.innerWidth, window.innerHeight );
@@ -204,15 +218,6 @@
         controls = new TrackballControls( camera, renderer.domElement );
 
         window.addEventListener( 'resize', onWindowResize, false );
-      }
-
-      function onWindowResize() {
-
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-
-        renderer.setSize( window.innerWidth, window.innerHeight );
-
       }
 
       function animate() {
@@ -225,6 +230,57 @@
         TWEEN.update();
         renderer.render( scene, camera );
 
+      }
+
+      function onWindowResize() {
+
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+
+        renderer.setSize( window.innerWidth, window.innerHeight );
+
+      }
+
+      function createTestimonial(data) {
+        var allRows = data.split(/\r?\n|\r/);
+        for(var i = 0; i < allRows.length; i ++) {
+          var testimonial = allRows[i].match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g);
+          if(testimonial){
+            var name = testimonial[0];
+            var testimonialText = testimonial[4].replace(/['"]+/g, '');
+            var testimonialImg = testimonial[5].substring(testimonial[5].lastIndexOf("/") + 1, testimonial[5].length);
+
+            var testimonial = document.createElement('div');
+            testimonial.className = 'testimonial testimonialContainer';
+
+            var image = document.createElement('div');
+            image.className = 'testimonial testimonialImage';
+            image.style.backgroundImage = 'url(/images/portraits/' + testimonialImg + ')';
+
+            var text = document.createElement('span');
+            text.innerHTML = name;
+            text.className = 'tooltiptext';
+
+            testimonial.appendChild(image);
+            testimonial.appendChild(text);
+
+            var object = new CSS3DSprite(testimonial);
+            object.position.x = Math.random() * 4000 - 2000,
+            object.position.y = Math.random() * 4000 - 2000,
+            object.position.z = Math.random() * 4000 - 2000;
+            scene.add( object );
+
+            objects.push( object );
+
+            var bubbleDirection = {
+              x : (Math.random() * .6) - .4,
+              y : (Math.random() * .6) - .4,
+              z : (Math.random() * .6) - .4
+            }
+
+            animationDirections.push(bubbleDirection);
+          }
+        }
       }
 
       function animateBubbles() {
@@ -326,12 +382,10 @@
 					fadeTween.start();
 					fadeTween.onComplete(function() {
 						closeBtn.style.visibility = 'visible';
-            mainHeader.style.color = 'white';
 					});
 
 				} else {
 					closeBtn.style.visibility = 'hidden';
-          mainHeader.style.color = 'black';
 					zoomTestimonial("out", lastCamPos);
 					fadeTween.start();
 					fadeTween.onComplete(function() {
@@ -340,6 +394,7 @@
 					});
 				}
 			}
+      
     </script>
   </body>
 </html>
