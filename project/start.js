@@ -41,7 +41,7 @@ app.get('/healingvoices', function (request, response) {
 
 app.get('/media', function (request, response) {
   // load media.json
-  var content = fs.readFileSync(__dirname + 'data/media.json');
+  var content = fs.readFileSync(__dirname + '/data/media.json');
   var mediaItems = JSON.parse(content);
   mediaItems = mediaItems.items;
   response.render('pages/media', {
