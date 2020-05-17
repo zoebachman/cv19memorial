@@ -39,16 +39,6 @@ app.get('/healingvoices', function (request, response) {
   });
 });
 
-app.get('/healingvoices/valeriesmith', function (request, response) {
-  // load media.json
-  var content = fs.readFileSync('data/healing-voices.json');
-  var hvItems = JSON.parse(content);
-  hvItems = hvItems.items[0]; 
-  response.render('pages/healingvoices/valeriesmith', {
-    hvItems: hvItems
-  });
-});
-
 app.get('/media', function (request, response) {
   // load media.json
   var content = fs.readFileSync('data/media.json');
@@ -58,48 +48,6 @@ app.get('/media', function (request, response) {
     mediaItems: mediaItems
   });
 });
-
-app.get('/media/reforma', function (request, response) {
-  // load media.json
-  var content = fs.readFileSync('data/media.json');
-  var mediaItems = JSON.parse(content);
-  mediaItems = mediaItems.items[0]; 
-  response.render('pages/media/reforma', {
-    mediaItems: mediaItems
-  });
-});
-
-app.get('/media/mileno', function (request, response) {
-  // load media.json
-  var content = fs.readFileSync('data/media.json');
-  var mediaItems = JSON.parse(content);
-  mediaItems = mediaItems.items[1]; 
-  response.render('pages/media/mileno', {
-    mediaItems: mediaItems
-  });
-});
-
-app.get('/media/ruidoenlared', function (request, response) {
-  // load media.json
-  var content = fs.readFileSync('data/media.json');
-  var mediaItems = JSON.parse(content);
-  mediaItems = mediaItems.items[2]; 
-  response.render('pages/media/ruidoenlared', {
-    mediaItems: mediaItems
-  });
-});
-
-app.get('/media/piedepagina', function (request, response) {
-  // load media.json
-  var content = fs.readFileSync('data/media.json');
-  var mediaItems = JSON.parse(content);
-  mediaItems = mediaItems.items[3]; 
-  response.render('pages/media/piedepagina', {
-    mediaItems: mediaItems
-  });
-});
-
-
 
 app.listen(app.get('port'), function () {
   console.log('Node app is running on port', app.get('port'));
