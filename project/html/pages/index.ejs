@@ -11,9 +11,17 @@
 				background: radial-gradient(#e2dbfd, #c3dcfd 70%);
 
         font-family: freight-sans-pro, Arial, sans-serif;
+
         --nav-margin: 24px;
 			}
-      .header-item{
+
+      .nav {
+        font-weight: 500;
+        font-style: italic;
+        color: #426282;
+      }
+
+      .header-item {
         position: fixed;
         margin-top: var(--nav-margin);
         z-index: 999;
@@ -134,8 +142,8 @@
     <% include ../helpers/head %>
   </head>
   <body>
-    <div id="mainHeader" class="header-item">cv19memorial</div>
-    <div id="menu-container" class="header-item">
+    <div id="mainHeader" class="nav header-item">cv19memorial</div>
+    <div id="menu-container" class="nav header-item">
       <div id="menu-btn">menu</div>
       <div class="menu-content">
         <a href="#">about</a>
@@ -145,7 +153,7 @@
         <a href="#" style="padding-top:0px" >español</a>
       </div>
     </div>
-    <div class="page-footer">
+    <div class="nav page-footer">
       <div id="testimonyBtn">Submit your testimony</div>
       <div id="socials">
         <a href="https://twitter.com/memorialcv19"><img src="/images/icons/twitter_icon.png"></a>
