@@ -1,0 +1,36 @@
+/* OVERRIDES TO NAV */
+
+body {
+  max-width: 800px;
+  margin: auto;
+  font-family: freight-sans-pro, Arial, sans-serif;
+  background: white;
+}
+
+.page-header {
+  position: fixed;
+  background: white;
+}
+
+.page-header a {
+  text-decoration: none;
+}
+
+
+/* GRID PAGES (media, healing-voices) */
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, 33%);
+  grid-template-rows: repeat(3, 33%);
+}
+
+/* NON-ENVIRONMENT NAV */
+
+nav {
+  font-style: italic;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* MAIN ENVIRONMENT */
