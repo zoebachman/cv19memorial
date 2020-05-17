@@ -44,11 +44,15 @@
         font-weight: 600;
       }
       #menu-container:hover .menu-content {
-        display: block;
+        visibility: visible;
+        opacity: 1;
       }
       .menu-content {
         font-weight: 500;
-        display: none;
+        display: block;
+        visibility: hidden;
+        opacity: 0;
+        transition: 0.5s opacity;
         padding-bottom: 1em; /* give mouse a little wiggle room */
         padding-left: 1em; /* give mouse a little wiggle room */
       }
