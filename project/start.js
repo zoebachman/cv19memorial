@@ -4,6 +4,11 @@
 var express = require('express');
 var app = express();
 var fs = require('fs');
+var md = require('markdown-it')({
+  html: true,
+  linkify: true,
+  typographer: true
+});
 
 app.set('port', (process.env.PORT || 5000));
 
@@ -22,7 +27,10 @@ app.get('/', function (request, response) {
 });
 
 app.get('/about', function (request, response) {
-  response.render('pages/about');
+  const content = fs.readFileSync(__dirname + '/data/about.en.md').toString();
+  response.render('pages/about', {
+    body: md.render(content)
+  });
 });
 
 app.get('/form', function (request, response) {
