@@ -1,11 +1,3 @@
-Navbar  
-[Team](#Team)  
-[Community](#Community-Advisory-Board)  
-[Archive Access](#Archive-Access)  
-[FAQ](#FAQ)  
-[Contact](#Contact)  
-[Legal](#Legal)  
-
 # About
 
 ## Team
