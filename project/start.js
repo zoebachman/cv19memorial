@@ -22,7 +22,9 @@ app.set('port', (process.env.PORT || 5000));
 app.use(express.static(__dirname)); 
 
 // getting image files
-app.use(express.static('images')); 
+app.use(express.static('images'));
+app.use(express.static('css'));
+app.use(express.static('js'));
 
 app.use(locale(supportedLocales))
 app.use((req, res, next) => {
