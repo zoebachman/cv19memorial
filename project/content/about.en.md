@@ -27,8 +27,6 @@ Jorge Andrade - Phoebe Bachman - Zoe Bachman - Sergio Beltrán-García - Leigh B
 Jacob Ford - Tamara Jamil - Mark Nieto - Tim Nottage - Will Qian - Azalea Vaseghi
 
 
-
-
 ## Community Advisory Board
 The cv19memorial Community Advisory Board is a transnational group of people who have submitted testimony to the memorial and wanted to become further involved. Our first group of advisors are those who submitted testimonies in the first phase and were invited to participate on a voluntary basis. The group advises the memorial, informing decisions in the realms of platform design, communications, etc. Exact board roles and terms are currently in formation. 
 
