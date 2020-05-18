@@ -46,12 +46,12 @@ app.get('/', function (request, response) {
 });
 
 app.get('/about', function (request, response, next) {
-  const contentFile = `${__dirname}/data/about.${request.locale}.md`
+  const contentFile = `${__dirname}/content/about.${request.locale}.md`
   if (!fs.existsSync(contentFile)) {
     response.status(404).send(`404: Language "${request.locale}" not supported<br><br>Try <a href="${request.path}">this one</a>.`)
     return next()
   }
-  const content = fs.readFileSync(__dirname + '/data/about.en.md').toString();
+  const content = fs.readFileSync(contentFile).toString();
   response.render('pages/about', {
     body: md.render(content)
   });
