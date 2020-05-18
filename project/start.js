@@ -1,11 +1,11 @@
 // This file is what handles incoming requests and
 // serves files to the browser, or executes server-side code
 
-var express = require('express');
-var app = express();
-var locale = require('locale');
-var fs = require('fs');
-var md = require('markdown-it')({
+const express = require('express');
+const app = express();
+const locale = require('locale');
+const fs = require('fs');
+const md = require('markdown-it')({
   html: true,
   linkify: true,
   typographer: true
@@ -54,9 +54,8 @@ app.get('/form', function (request, response) {
 
 app.get('/healingvoices', function (request, response) {
   // load healing-voices.json
-  var content = fs.readFileSync(__dirname + '/data/healing-voices.json');
-  var hvItems = JSON.parse(content);
-  hvItems = hvItems.items;
+  const content = fs.readFileSync(__dirname + '/data/healing-voices.json');
+  const hvItems = JSON.parse(content).items;
   response.render('pages/healingvoices', {
     hvItems: hvItems
   });
