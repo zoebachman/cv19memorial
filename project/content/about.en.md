@@ -119,18 +119,7 @@ COVID-19 has changed all of our lives; it is a shared grief. This is a space for
 ### Further thoughts?
 We value your input in how best to build this shared memorial as inclusive and thoughtful as possible.
 
-
-<form>
-1. First name:<br>
-<input type="text" value="" id="contact-fname" name="contact-fname"/><br>
-2. Last name: <br>
-<input type="text" value="" id="contact-lname" name="contact-lname"/><br>
-3. Email: <br>
-<input type="text" value="" id="contact-email" name="contact-email"/><br>
-4. Message<br>
-<textarea name="contact-message" rows="10" cols="30"></textarea><br>
-<input type="submit" value="Submit">
-</form>
+Email <a href="mailto:info@cv19memorial.org">info@cv19memorial.org</a> with any feedback.
 
 
 ## Legal
