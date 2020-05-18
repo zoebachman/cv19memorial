@@ -50,7 +50,7 @@ Submissions are provided by those who lost someone to COVID-19, those who surviv
 Cv19memorial_archiveaccessform.pdf
 Form_Flowchart.pdf 
 
-Those interested in accessing the dataset should complete the application on this page.
+Those interested in accessing the dataset should complete the following [application](https://cv19memorial.typeform.com/to/m3p8Qn). Email <a href="mailto:info@cv19memorial.org">info@cv19memorial.org</a> with any questions. 
 
 ### Archive Access Application
 
@@ -76,31 +76,6 @@ Approval of a research project by cv19memorial via this form and provision of da
 
 #### Dissemination
 The applicant(s) must submit an electronic copy to cv19memorial of any and all reports, presentations, and publications based on the data prior to the time of publication/presentation. cv19memorial reserves the right to disseminate your findings on its website in a form compatible with any copyright agreement, if any. Under no circumstances may researchers share the data with anyone who has not been approved for access by cv19memorial.
-
-#### Application
-<form>
-1. First name:<br>
-<input type="text" value="" id="fname" name="fname"/><br>
-2. Last name: <br>
-<input type="text" value="" id="lname" name="lname"/><br>
-3. Email: <br>
-<input type="text" value="" id="email" name="email"/><br>
-4. Academic Affiliation/Organization:<br>
-<input type="text" value="" id="academic" name="academic"/><br>
-5. Role:<br>
-<input type="text" value="" id="role" name="role"/><br>
-6. Project title:<br>
-<input type="text" value="" id="ptitle" name="ptitle"/><br>
-7. What is the purpose and methodology of this project?<br>
-<textarea name="purpose" rows="10" cols="30"></textarea><br>
-8. How is this project aligned with the values of cv19memorial? (Values include: access, representation, transnationalism, collectivity, honesty, and justice. More information <a href="https://cv19memorial.org/about#team">here</a>.)<br>
-<textarea name="values" rows="10" cols="30"></textarea><br>
-9. What specific pieces of information collected through cv19memorial are of interest?<br>
-<textarea name="information" rows="10" cols="30"></textarea><br>
-10. How, when, and to whom will the results be released?<br>
-<textarea name="results" rows="10" cols="30"></textarea><br>
-<input type="submit" value="Submit">
-</form>
 
 
 ## FAQ
