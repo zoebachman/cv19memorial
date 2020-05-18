@@ -3,12 +3,18 @@
 
 var express = require('express');
 var app = express();
+var locale = require('locale');
 var fs = require('fs');
 var md = require('markdown-it')({
   html: true,
   linkify: true,
   typographer: true
 });
+
+const supportedLocales = [
+  'en',
+  'es'
+]
 
 app.set('port', (process.env.PORT || 5000));
 
@@ -17,6 +23,13 @@ app.use(express.static(__dirname));
 
 // getting image files
 app.use(express.static('images')); 
+
+app.use(locale(supportedLocales))
+app.use((req, res, next) => {
+  // make locale available to views as `locale`
+  res.locals.locale = req.locale
+  next()
+})
 
 // views is directory for all template files
 app.set('views', __dirname + '/html');
