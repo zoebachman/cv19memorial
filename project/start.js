@@ -29,7 +29,7 @@ app.use(express.static('js'));
 app.use(locale(supportedLocales))
 app.use((req, res, next) => {
   // override Accept-Language browser locale if URL has ?lang=* query
-  if (supportedLocales.includes(req.query.lang)) {
+  if (req.query.lang) {
     req.locale = req.query.lang
   }
   // make locale available to views as <%= locale %>
@@ -45,7 +45,12 @@ app.get('/', function (request, response) {
   response.render('pages/index');
 });
 
-app.get('/about', function (request, response) {
+app.get('/about', function (request, response, next) {
+  const contentFile = `${__dirname}/data/about.${request.locale}.md`
+  if (!fs.existsSync(contentFile)) {
+    response.status(404).send(`404: Language "${request.locale}" not supported<br><br>Try <a href="${request.path}">this one</a>.`)
+    return next()
+  }
   const content = fs.readFileSync(__dirname + '/data/about.en.md').toString();
   response.render('pages/about', {
     body: md.render(content)
