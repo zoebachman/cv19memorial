@@ -28,7 +28,11 @@ app.use(express.static('js'));
 
 app.use(locale(supportedLocales))
 app.use((req, res, next) => {
-  // make locale available to views as `locale`
+  // override Accept-Language browser locale if URL has ?lang=* query
+  if (supportedLocales.includes(req.query.lang)) {
+    req.locale = req.query.lang
+  }
+  // make locale available to views as <%= locale %>
   res.locals.locale = req.locale
   next()
 })
