@@ -37,9 +37,8 @@ Information about individual Community Advisory Board members and further ways t
 ### Partnerships
 We are invested in growing a community of human rights defenders, activists, media partners, initiatives and artists, among many others, to amplify and strengthen cv19memorial’s mission. If you are interested in joining our effort to provide a space for collective mourning & witnessing of testimonies, please reach out at info@cv19memorial.org
 
-(Logos)
-![]()
-![]()
+![Monument Labs Logo](../images/logos/MonumentLab_Logo.png)
+![Nosotrxs Logo](../images/logos/Nosotrxs_Logo.png)
 
 
 
