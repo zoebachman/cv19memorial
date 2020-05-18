@@ -63,7 +63,7 @@ app.get('/form', function (request, response) {
 
 app.get('/healingvoices', function (request, response) {
   // load healing-voices.json
-  const content = fs.readFileSync(__dirname + '/data/healing-voices.json');
+  const content = fs.readFileSync(__dirname + '/content/healing-voices.json');
   const hvItems = JSON.parse(content).items;
   response.render('pages/healingvoices', {
     hvItems: hvItems
@@ -72,7 +72,7 @@ app.get('/healingvoices', function (request, response) {
 
 app.get('/media', function (request, response) {
   // load media.json
-  var content = fs.readFileSync(__dirname + '/data/media.json');
+  var content = fs.readFileSync(__dirname + '/content/media.json');
   var mediaItems = JSON.parse(content);
   mediaItems = mediaItems.items;
   response.render('pages/media', {
