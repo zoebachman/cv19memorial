@@ -9,7 +9,12 @@ const md = require('markdown-it')({
   html: true,
   linkify: true,
   typographer: true
+}).use(require('markdown-it-front-matter'), function(fm) {
+  console.log(fm);
 });
+
+  
+
 
 const supportedLocales = [
   'en',

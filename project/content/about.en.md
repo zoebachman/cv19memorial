@@ -1,16 +1,17 @@
 ---
   - title: Team
-    anchor: Team
+    anchor: #Team
   - title: Community
-    anchor: Community
+    anchor: #Community-Advisory-Board
   - title: Archive Access
-    anchor: Archive Access
+    anchor: #Archive-Access
   - title: FAQ
-    anchor: FAQ
+    anchor: #FAQ
   - title: Contact
-    anchor: Contact
+    anchor: #Contact
+  - title: Legal
+    anchor: #Legal
 ---
-
 
 # About
 
@@ -51,8 +52,8 @@ cv19memorial is a platform for sharing and archiving stories of loss during the 
 Available data are provided to cv19memorial for (a) archive-only addition to the memorial, (b) anonymous but public addition to the memorial, and (c) completely public addition to the memorial. In all cases, we have permission to share anonymized data. Information provided will not contain individual identifiers. 
 Submissions are provided by those who lost someone to COVID-19, those who survived it, those who provide care, those who have lost their source of income as a result of the pandemic, and by those experiencing other forms of loss. The specific pieces of information in the archive include: testimony (narrative story), media uploads, death date, citizenship, country and city of residence, age, gender, ethnicity, and more (see PDF below for full list). We ask that you respect participants' privacy and not attempt to identify anyone per the template data use agreement, which you may review below:
 
-![Cv19memorial_archiveaccessform.pdf](../images/pdfs/cv19memorialDataUseAgreement_Sample.pdf)
-![Form_Flowchart.pdf](../images/pdfs/cv19memorial_Form_Flowchart.pdf) 
+[Cv19memorial_archiveaccessform.pdf](../images/pdfs/cv19memorialDataUseAgreement_Sample.pdf)
+[Form_Flowchart.pdf](../images/pdfs/cv19memorial_Form_Flowchart.pdf) 
 
 Those interested in accessing the dataset should complete the following [application](https://cv19memorial.typeform.com/to/m3p8Qn). Email <a href="mailto:info@cv19memorial.org">info@cv19memorial.org</a> with any questions. 
 
