@@ -61,22 +61,27 @@ app.get('/form', function (request, response) {
   response.render('pages/form');
 });
 
-app.get('/healingvoices', function (request, response) {
-  // load healing-voices.json
-  const content = fs.readFileSync(__dirname + '/content/healing-voices.json');
-  const hvItems = JSON.parse(content).items;
-  response.render('pages/healingvoices', {
-    hvItems: hvItems
+app.get('/healingvoices', function (request, response, next) {
+  const contentFile = `${__dirname}/content/healing-voices.${request.locale}.md`
+  if (!fs.existsSync(contentFile)) {
+    response.status(404).send(`404: Language "${request.locale}" not supported<br><br>Try <a href="${request.path}">this one</a>.`)
+    return next()
+  }
+  const content = fs.readFileSync(contentFile).toString();
+  response.render('pages/healing-voices', {
+    body: md.render(content)
   });
 });
 
-app.get('/media', function (request, response) {
-  // load media.json
-  var content = fs.readFileSync(__dirname + '/content/media.json');
-  var mediaItems = JSON.parse(content);
-  mediaItems = mediaItems.items;
+app.get('/media', function (request, response, next) {
+  const contentFile = `${__dirname}/content/media.${request.locale}.md`
+  if (!fs.existsSync(contentFile)) {
+    response.status(404).send(`404: Language "${request.locale}" not supported<br><br>Try <a href="${request.path}">this one</a>.`)
+    return next()
+  }
+  const content = fs.readFileSync(contentFile).toString();
   response.render('pages/media', {
-    mediaItems: mediaItems
+    body: md.render(content)
   });
 });
 
