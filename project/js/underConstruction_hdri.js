@@ -30,7 +30,7 @@ function createModel() {
   var geometry = new THREE.SphereGeometry( 500, 60, 40 );
 
   var material = new THREE.MeshBasicMaterial( {
-      map: new THREE.TextureLoader().load( 'textures/2020_0515_cave(1.852_1).png' )
+      map: new THREE.TextureLoader().load( '/textures/2020_0514_cave_pano_test.png' )
   } );
 
   var mesh = new THREE.Mesh( geometry, material );
