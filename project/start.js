@@ -68,7 +68,7 @@ app.get('/healingvoices', function (request, response, next) {
     return next()
   }
   const content = fs.readFileSync(contentFile).toString();
-  response.render('pages/healing-voices', {
+  response.render('pages/healingvoices', {
     body: md.render(content)
   });
 });
