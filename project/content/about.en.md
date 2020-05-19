@@ -1,4 +1,5 @@
 ---
+toc:
   - title: Team
     anchor: #Team
   - title: Community
