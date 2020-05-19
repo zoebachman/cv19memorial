@@ -73,6 +73,18 @@ app.get('/healingvoices', function (request, response, next) {
   });
 });
 
+app.get('/valeriesmith', function (request, response, next) {
+  const contentFile = `${__dirname}/content/valeriesmith.${request.locale}.md`
+  if (!fs.existsSync(contentFile)) {
+    response.status(404).send(`404: Language "${request.locale}" not supported<br><br>Try <a href="${request.path}">this one</a>.`)
+    return next()
+  }
+  const content = fs.readFileSync(contentFile).toString();
+  response.render('pages/valeriesmith', {
+    body: md.render(content)
+  });
+});
+
 app.get('/media', function (request, response, next) {
   const contentFile = `${__dirname}/content/media.${request.locale}.md`
   if (!fs.existsSync(contentFile)) {
