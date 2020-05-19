@@ -55,6 +55,7 @@ function createOrbit() {
   control.object.position.set(0, 0, 200);
   control.target.set(0, 0, 0);
   control.autoRotate = true;
+  control.autoRotateSpeed = 1.0;
   control.update();
 }
 
