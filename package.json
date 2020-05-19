@@ -10,7 +10,8 @@
     "ejs": "^2.5.6",
     "express": "^4.15.2",
     "locale": "^0.1.0",
-    "markdown-it": "^10.0.0"
+    "markdown-it": "^10.0.0",
+    "markdown-it-front-matter": "^0.2.1"
   },
   "engines": {
     "node": "12"
