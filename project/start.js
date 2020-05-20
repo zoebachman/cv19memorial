@@ -19,7 +19,7 @@ const supportedLocales = [
 app.set('port', (process.env.PORT || 5000));
 
 // was causing wonkiness but now seems fine
-app.use(express.static(__dirname)); 
+app.use(express.static(__dirname));
 
 // getting image files
 app.use(express.static('images'));
@@ -78,6 +78,10 @@ app.get('/media', function (request, response) {
   response.render('pages/media', {
     mediaItems: mediaItems
   });
+});
+
+app.get('/under-construction', function (request, response) {
+  response.render('pages/underConstruction');
 });
 
 app.listen(app.get('port'), function () {

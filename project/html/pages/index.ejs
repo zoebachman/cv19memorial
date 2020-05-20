@@ -5,6 +5,8 @@
     <link rel="stylesheet" href="https://use.typekit.net/kaq5whx.css">
     <link rel="stylesheet" href="/css/main_env.css">
     <link rel="stylesheet" href="/css/memorial_interior.css">
+    <script src="/js/three/build/three.min.js"></script>
+    <script src="/js/three/build/OrbitControls.js"></script>
     <% include ../helpers/head %>
   </head>
   <body>
@@ -29,36 +31,28 @@
       </div>
     </div>
     <div id="fadeScreen">
-      <image src="images/icons/close_btn.png" id="close_btn">
+      <image src="images/icons/return_icon.png" id="return_btn">
     </div>
     <p id="cursorTextContainer"></p>
     <div id="main-container"></div>
-    <div id="memorial-scene"> <!-- memorial interior scene -->
+    <div id="memorial-scene">
       <div id="overlay">
-  			<div id="content-container">
+        <div id="content-container">
   				<div id="testimony__info">
-  		      <div class="personal__info">
-              <span>Jane Doe</span>
-              <span>1952-2020</span>
-              <span>San Francisco, CA</span>
-  					</div>
-  					<div class="testimony__type">
-              <p>loss of loved one</p>
-  					</div>
+  		      <div class="personal__info"></div>
+  					<div class="testimony__type"></div>
   				</div>
   				<div id="testimony_img"></div>
   				<div id="testimony-wrapper">
-  					<blockquote class="text">
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Dignissim suspendisse in est ante in nibh mauris cursus. Sapien et ligula ullamcorper malesuada proin libero nunc consequat. Luctus venenatis lectus magna fringilla urna porttitor rhoncus dolor purus. Turpis egestas pretium aenean pharetra magna ac. Ullamcorper malesuada proin libero nunc consequat. Placerat in egestas erat imperdiet sed euismod nisi. Sed nisi lacus sed viverra tellus in hac habitasse platea. Amet dictum sit amet justo donec enim diam vulputate ut. Odio eu feugiat pretium nibh ipsum consequat nisl. Eget nunc lobortis mattis aliquam faucibus purus in massa tempor. Eget est lorem ipsum dolor sit amet consectetur. Euismod quis viverra nibh cras pulvinar. Non blandit massa enim nec dui. Viverra nibh cras pulvinar mattis nunc sed blandit libero. Nisl suscipit adipiscing bibendum est ultricies integer quis. Tortor id aliquet lectus proin nibh. Feugiat in fermentum posuere urna nec tincidunt praesent semper feugiat. Lectus sit amet est placerat in egestas erat imperdiet. Mattis pellentesque id nibh tortor. Eget lorem dolor sed viverra ipsum nunc. Adipiscing at in tellus integer feugiat scelerisque. Est lorem ipsum dolor sit amet. Magnis dis parturient montes nascetur ridiculus mus mauris vitae. Senectus et netus et malesuada fames ac turpis egestas integer. Massa massa ultricies mi quis hendrerit dolor magna eget. Condimentum id venenatis a condimentum vitae sapien pellentesque habitant. Eu scelerisque felis imperdiet proin fermentum leo. Tincidunt lobortis feugiat vivamus at augue eget arcu dictum. Elementum sagittis vitae et leo duis ut diam.
-              </p>
-            </blockquote>
+  					<blockquote class="text"></blockquote>
   				</div>
   			</div>
-  		</div>
-  		<div id="world"></div> <!-- panno to come -->
+      </div>
+      <div id="world"></div>
     </div>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script src="/js/hdriBackground.js"></script>
+    <script src="/js/memorial.js"></script>
     <script type="module" src="/js/main_3D.js"></script>
   </body>
 </html>
