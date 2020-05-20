@@ -42,7 +42,8 @@ app.set('views', __dirname + '/html');
 app.set('view engine', 'ejs');
 
 app.get('/', function (request, response) {
-  response.render('pages/index');
+  // response.render('pages/index'); turned off for domain migration
+  response.render('pages/underConstruction');
 });
 
 app.get('/about', function (request, response, next) {
