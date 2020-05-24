@@ -1,3 +1,19 @@
+---
+toc:
+  - title: Team
+    anchor: #Team
+  - title: Community
+    anchor: #Community-Advisory-Board
+  - title: Archive Access
+    anchor: #Archive-Access
+  - title: FAQ
+    anchor: #FAQ
+  - title: Contact
+    anchor: #Contact
+  - title: Legal
+    anchor: #Legal
+---
+
 # About
 
 ## Team
@@ -15,8 +31,8 @@ Justice for the deceased and their families
 ### Who We Are
 We are a team of activists, artists, designers and researchers committed to human rights defense and with ample experience in the development of memorials, participatory processes and interactive platforms. We live in Mexico, the UK, Canada and the USA. We are also people like you, deeply affected and grieving during the COVID-19 crisis who care about telling this story.
 
-Jorge Andrade - Phoebe Bachman - Zoe Bachman - Sergio Beltrán-García - Leigh Brown 
-Jacob Ford - Tamara Jamil - Mark Nieto - Tim Nottage - Will Qian - Azalea Vaseghi
+Jorge Andrade - [Phoebe Bachman]() - [Zoe Bachman](https://cargocollective.com/zoebachman) - [Sergio Beltrán-García](https://ssbeltran.com/) - Leigh Brown 
+Jacob Ford - Tamara Jamil - Mark Nieto - [Tim Nottage](https://www.timnottage.com/) - Will Qian - [Azalea Vaseghi](https://www.azaleavaseghi.com/)
 
 
 ## Community Advisory Board
@@ -36,8 +52,9 @@ We are invested in growing a community of human rights defenders, activists, med
 cv19memorial is a platform for sharing and archiving stories of loss during the COVID-19 pandemic. Individuals or organizations may apply for access to the archive to further mobilize testimonies in forums such as: legal cases, legislative efforts, artistic endeavours, or academic research etc. 
 Available data are provided to cv19memorial for (a) archive-only addition to the memorial, (b) anonymous but public addition to the memorial, and (c) completely public addition to the memorial. In all cases, we have permission to share anonymized data. Information provided will not contain individual identifiers. 
 Submissions are provided by those who lost someone to COVID-19, those who survived it, those who provide care, those who have lost their source of income as a result of the pandemic, and by those experiencing other forms of loss. The specific pieces of information in the archive include: testimony (narrative story), media uploads, death date, citizenship, country and city of residence, age, gender, ethnicity, and more (see PDF below for full list). We ask that you respect participants' privacy and not attempt to identify anyone per the template data use agreement, which you may review below:
-Cv19memorial_archiveaccessform.pdf
-Form_Flowchart.pdf 
+
+[Cv19memorial Archive Accessform (pdf)](../images/pdfs/cv19memorialDataUseAgreement_Sample.pdf)  
+[Form Flowchart (pdf)](../images/pdfs/cv19memorial_Form_Flowchart.pdf) 
 
 Those interested in accessing the dataset should complete the following [application](https://cv19memorial.typeform.com/to/m3p8Qn). Email <a href="mailto:info@cv19memorial.org">info@cv19memorial.org</a> with any questions. 
 
@@ -92,5 +109,5 @@ cv19memorial was founded in April 2020 as a platform for people to share their e
 
 Should you desire for us to remove your testimony from the memorial or make it private, please let us know by sending an email to info@cv19memorial.org with the subject “Change Permissions” and include the testimony's Unique ID that we provided when you submitted.
 
-[Terms of Use](cv19memorial-terms-of-use.pdf)  
-[Privacy Policy](cv19memorial-privacy-policy.pdf)
+[Terms of Use](cv19memorial_TermsOfUse_15-05-2020.pdf)  
+[Privacy Policy](cv19memorial_PrivacyPolicy_15-05-2020.pdf)
