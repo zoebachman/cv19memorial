@@ -14,11 +14,12 @@ function createMemorialContent(content) {
 
   removeChildren([personalInfo_container, testimonyType_container, imageContainer, testimonyContainer]);
 
-  for (var i = 0; i < content[0].length; i ++) {
-    createTestimonyTxtElem(content[0][i], "span", personalInfo_container, null);
-  }
+  createHeaderElem([content[0][0]], "H2", personalInfo_container);
+  createHeaderElem([content[0][1], content[0][2]], "H3", personalInfo_container);
+  createHeaderElem([content[0][3]], "H4", personalInfo_container);
+  createTestimonyTxtElem(content[1], "p", testimonyType_container);
 
-  createTestimonyTxtElem(content[1], "p", testimonyType_container, testimonyInfo_container);
+  testimonyElements.push(testimonyInfo_container);
 
   if(content[2]){
     var portraitElem = document.createElement("div");
@@ -33,22 +34,41 @@ function createMemorialContent(content) {
     createTestimonyText(content[3].split(' '));
   }
 
-  console.log(testimonyElements);
+  // console.log(testimonyElements);
 
   testimonyElements[0].style.opacity = '1';
   for (var i = 1; i < testimonyElements.length; i ++) {
     testimonyElements[i].style.opacity = '0';
-    console.log("The opacity of testimony " + (i + 1) + " is now " + testimonyElements[i].style.opacity);
+    // console.log("The opacity of testimony " + (i + 1) + " is now " + testimonyElements[i].style.opacity);
   }
 
   angleIncrement = 360/(testimonyElements.length );
 
   for(var i = 0; i < testimonyElements.length; i ++) {
 
-    console.log("If degree is between " + i * angleIncrement + " and " + ((i + 1) * angleIncrement) + ", item " + (i + 1) + " will be shown.");
+    // console.log("If degree is between " + i * angleIncrement + " and " + ((i + 1) * angleIncrement) + ", item " + (i + 1) + " will be shown.");
 
     elementDegrees.push([i * angleIncrement, (i + 1) * angleIncrement]);
   }
+}
+
+function createHeaderElem(headerTxt, headerType, headerCont) {
+  var finalText = "";
+
+  for(var i = 0; i < headerTxt.length; i ++) {
+    if(headerTxt[i]){
+      finalText += headerTxt[i];
+    }
+  }
+
+  var header = document.createElement("HEADER");
+  headerCont.appendChild(header);
+
+  var headerTxtCont = document.createElement(headerType);
+  header.appendChild(headerTxtCont);
+
+  var headerTxtNode = document.createTextNode(finalText);
+  headerTxtCont.appendChild(headerTxtNode);
 }
 
 function createTestimonyTxtElem(content, elemType, container, testimonyElemContainer) {
@@ -58,10 +78,6 @@ function createTestimonyTxtElem(content, elemType, container, testimonyElemConta
 
     dom_el.appendChild(txt);
     container.appendChild(dom_el);
-
-    if(testimonyElemContainer) {
-      testimonyElements.push(testimonyElemContainer);
-    }
   }
 }
 
@@ -106,13 +122,13 @@ function createTestimonyParagraph() {
   blockquoteElem.appendChild(testimony_txtContainer);
   testimonyContainer.appendChild(blockquoteElem);
 
-  testimonyElements.push(testimony_txtContainer);
+  testimonyElements.push(blockquoteElem);
 
   return testimony_txtContainer;
 }
 
 function showContent(degree) {
-  console.log(degree);
+  // console.log(degree);
   for(i = 0; i < elementDegrees.length; i ++) {
     if (i == 0) {
       if (degree > elementDegrees[i][0] && degree < elementDegrees[i][1] && testimonyElements[i].style.opacity == '0') {

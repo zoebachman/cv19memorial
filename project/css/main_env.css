@@ -47,8 +47,8 @@ hr {
   visibility: hidden;
   opacity: 0;
   transition: 0.5s opacity;
-  padding-bottom: 1em; /* give mouse a little wiggle room */
-  padding-left: 1em; /* give mouse a little wiggle room */
+  padding-bottom: 2em; /* give mouse a little wiggle room */
+  padding-left: 2em; /* give mouse a little wiggle room */
 }
 .menu-content a {
   color: #426282;
@@ -73,18 +73,20 @@ hr {
   z-index: 999;
   cursor: default;
 }
-#testimonyBtn {
+.btn {
   display: inline-block;
   border-radius: 5%;
   padding: 0.5em;
   margin: -0.5em;
   color: #426282;
   text-align: center;
-  margin-left: calc(var(--nav-margin) - 0.5em);
   transition: 0.5s background-color;
 }
-#testimonyBtn:hover {
+.btn:hover {
   background-color: rgba(255, 255, 255, .5);
+}
+#testimonyBtn {
+  margin-left: calc(var(--nav-margin) - 0.5em);
 }
 #socials {
   display: flex;
@@ -92,6 +94,32 @@ hr {
   justify-content: space-between;
   width: 180px;
   margin-right: var(--nav-margin);
+}
+#directions {
+  position: absolute;
+  top: 0em;
+  left: 0em;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(#e2dbfd, #c3dcfd 100%);
+  z-index: 997;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-weight: 500;
+  font-style: italic;
+  color: #426282;
+  visibility: visible;
+  opacity: 1;
+}
+#directions * {
+  margin: 1em 1em;
+}
+#directions div:nth-child(2) {
+  cursor: pointer;
+  text-decoration: underline;
 }
 #main-container {
   position: absolute;
@@ -121,6 +149,7 @@ hr {
   -o-filter: blur(40px);
   -ms-filter: blur(40px);
   filter: blur(40px);
+  cursor: pointer;
 }
 .testimonialImage:hover {
   -webkit-filter: blur(10px);
@@ -146,23 +175,22 @@ hr {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0);
-  z-index: 1;
+  z-index: 998;
   visibility: hidden;
 }
 #memorial-scene {
-   position: absolute;
-   top: 0em;
-   left:-999em;
-   width: 100%;
-   height: 100%;
-   overflow: hidden;
+  position: absolute;
+  top: 0em;
+  left:-999em;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
 #return_btn {
-  position: absolute;
-  top: 0;
-  left: 0;
-  padding: 4% 0% 0% 1.5%;
-  width: 2%;
+  position: fixed;
+  margin-top: calc(var(--nav-margin) + 2em);
+  margin-left: var(--nav-margin);
   visibility: hidden;
   cursor: pointer;
+  text-decoration: underline;
 }

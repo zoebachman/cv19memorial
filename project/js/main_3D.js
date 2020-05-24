@@ -14,12 +14,15 @@ var bubbleGradients = [[[255, 84, 79], [250, 209, 38]], [[91, 70, 129], [30, 147
 var animationDirections = [];
 var animateBbls = true;
 
+var directionScreen = document.getElementById("directions");
 var toolTipTextContainer = document.getElementById("cursorTextContainer");
+var mainScene = document.getElementById("main-container");
 var fadeToDiv = document.getElementById("fadeScreen");
 var returnBtn = document.getElementById("return_btn");
-
-var mainScene = document.getElementById("main-container");
 var memorialScene = document.getElementById("memorial-scene");
+var memorialOverlay = document.getElementById("overlay");
+
+var hasVisitedMemorial = false;
 
 initiate();
 
@@ -36,6 +39,10 @@ window.onload = function() {
   returnBtn.addEventListener("click", function (event) {
     fadeModal("in", "main");
   });
+  directionScreen.children[1].addEventListener("click", function (event) {
+    directionAppearance('hidden', '0', 'opacity 1s ease-in-out, visibility 0s linear 1s');
+  });
+  calculateOverlay(window.innerWidth);
 }
 
 function initiate() {
@@ -84,11 +91,17 @@ function animate() {
 }
 
 function onWindowResize() {
+  location.reload();
+}
 
-  css_camera.aspect = window.innerWidth / window.innerHeight;
-  css_camera.updateProjectionMatrix();
-
-  css_renderer.setSize( window.innerWidth, window.innerHeight );
+function calculateOverlay(winWidth) {
+  if (winWidth <= 600) {
+    overlay.style.width = "70%"
+  } else if (winWidth > 600 && winWidth < 1200) {
+    overlay.style.width = (70 - ((winWidth - 600) * 0.042)) + "%";
+  } else if (winWidth >= 1200) {
+    overlay.style.width = "45%";
+  }
 }
 
 function createTestimonial(data) {
@@ -96,18 +109,18 @@ function createTestimonial(data) {
   for(var i = 0; i < allRows.length; i ++) {
     var testimony_data = allRows[i].match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g);
     if(testimony_data){
-      var name, age, dod, type, img_src, testimony_txt;
+      var name, age, dod, location, type, img_src, testimony_txt;
       if (testimony_data[1] == "Loss of loved one" && testimony_data[5] != "null") {
         name = testimony_data[5] + " " + testimony_data[6];
 
         if (testimony_data[8] != "null") {
-          age = testimony_data[8];
+          age = "Age: " + testimony_data[8] + ", ";
         } else {
           age = undefined;
         }
 
         if (testimony_data[7] != "null") {
-          dod = testimony_data[7];
+          dod = "Date of Passing: " + testimony_data[7];
         } else {
           dod = undefined;
         }
@@ -115,12 +128,23 @@ function createTestimonial(data) {
         name = testimony_data[2] + " " + testimony_data[3];
 
         if (testimony_data[4] != "null") {
-          age = testimony_data[4];
+          age = "Age: " + testimony_data[4];
         } else {
           age = undefined;
         }
 
         dod = undefined;
+      }
+
+      if (testimony_data[11] != "null") {
+        location = testimony_data[11];
+
+        if (testimony_data[12] != "null") {
+          location = testimony_data[12].replace(/['"]+/g, '') + ", " + testimony_data[11] ;
+        }
+      } else {
+
+        location = undefined;
       }
 
       type = testimony_data[1];
@@ -137,7 +161,7 @@ function createTestimonial(data) {
         testimony_txt = undefined;
       }
 
-      testimonyContent.push([[name, age, dod], type, img_src, testimony_txt]);
+      testimonyContent.push([[name, age, dod, location], type, img_src, testimony_txt]);
     }
   }
   createBubbles();
@@ -280,18 +304,40 @@ function fadeModal(direction, scene) {
   fadeTween.onComplete(function() {
     if (direction == "in") {
       animateBbls = !animateBbls;
-      sceneToShow.style.left= '0em';
-      sceneToHide.style.left = '-999em';
-      returnBtn.style.visibility = btnViz;
       fadeModal("out", scene);
       if (scene == "main") {
         resetMemorialControls();
         zoomTestimonial("out", css_camera);
+        if(hasVisitedMemorial == false) {
+          directionAppearance('hidden', '0', null);
+          hasVisitedMemorial = true;
+        }
+      } else {
+        if(hasVisitedMemorial == false) {
+          directionScreen.children[0].children[0].innerHTML = "rotate to explore the memorial";
+          directionScreen.style.background = 'rgba(0, 0, 0, 0.95)';
+          directionScreen.style.color = '#f4eae0';
+          directionScreen.children[1].style.color = '#f4eae0';
+          directionAppearance('visible', '1', null);
+        }
       }
+      sceneToShow.style.left= '0em';
+      sceneToHide.style.left = '-999em';
+      returnBtn.style.visibility = btnViz;
     } else {
       fadeToDiv.style.visibility = 'hidden';
     }
   });
+}
+
+function directionAppearance(visibility, opacity, transition) {
+  if (transition) {
+    directionScreen.style.transition = transition;
+  } else {
+    directionScreen.style.removeProperty('transition');
+  }
+  directionScreen.style.opacity = opacity;
+  directionScreen.style.visibility = visibility;
 }
 
 function resetMemorialControls() {

@@ -42,8 +42,7 @@ app.set('views', __dirname + '/html');
 app.set('view engine', 'ejs');
 
 app.get('/', function (request, response) {
-  // response.render('pages/index'); turned off for domain migration
-  response.render('pages/underConstruction');
+  response.render('pages/index');
 });
 
 app.get('/about', function (request, response, next) {
@@ -79,10 +78,6 @@ app.get('/media', function (request, response) {
   response.render('pages/media', {
     mediaItems: mediaItems
   });
-});
-
-app.get('/under-construction', function (request, response) {
-  response.render('pages/underConstruction');
 });
 
 app.listen(app.get('port'), function () {
