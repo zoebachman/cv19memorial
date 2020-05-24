@@ -31,8 +31,8 @@ Justice for the deceased and their families
 ### Who We Are
 We are a team of activists, artists, designers and researchers committed to human rights defense and with ample experience in the development of memorials, participatory processes and interactive platforms. We live in Mexico, the UK, Canada and the USA. We are also people like you, deeply affected and grieving during the COVID-19 crisis who care about telling this story.
 
-Jorge Andrade - Phoebe Bachman - Zoe Bachman - Sergio Beltrán-García - Leigh Brown 
-Jacob Ford - Tamara Jamil - Mark Nieto - Tim Nottage - Will Qian - Azalea Vaseghi
+Jorge Andrade - [Phoebe Bachman]() - [Zoe Bachman](https://cargocollective.com/zoebachman) - [Sergio Beltrán-García](https://ssbeltran.com/) - Leigh Brown 
+Jacob Ford - Tamara Jamil - Mark Nieto - [Tim Nottage](https://www.timnottage.com/) - Will Qian - [Azalea Vaseghi](https://www.azaleavaseghi.com/)
 
 
 ## Community Advisory Board
@@ -109,5 +109,5 @@ cv19memorial was founded in April 2020 as a platform for people to share their e
 
 Should you desire for us to remove your testimony from the memorial or make it private, please let us know by sending an email to info@cv19memorial.org with the subject “Change Permissions” and include the testimony's Unique ID that we provided when you submitted.
 
-[Terms of Use](cv19memorial-terms-of-use.pdf)  
-[Privacy Policy](cv19memorial-privacy-policy.pdf)
+[Terms of Use](cv19memorial_TermsOfUse_15-05-2020.pdf)  
+[Privacy Policy](cv19memorial_PrivacyPolicy_15-05-2020.pdf)
