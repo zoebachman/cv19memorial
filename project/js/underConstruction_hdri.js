@@ -11,7 +11,6 @@ function init() {
   render();
   createOrbit();
   loop();
-  window.addEventListener( 'resize', onWindowResize, false );
 }
 
 function createScene() {
@@ -63,12 +62,4 @@ function loop() {
   renderer.render(scene, camera);
   requestAnimationFrame(loop);
   control.update();
-}
-
-function onWindowResize() {
-
-  camera.aspect = window.innerWidth / window.innerHeight;
-  camera.updateProjectionMatrix();
-
-  renderer.setSize( window.innerWidth, window.innerHeight );
 }

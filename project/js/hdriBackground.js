@@ -11,8 +11,6 @@ function init() {
   render();
   createOrbit();
   loop();
-
-  window.addEventListener( 'resize', onWindowResize, false );
 }
 
 function createScene() {
@@ -53,6 +51,8 @@ function createOrbit() {
   control = new THREE.OrbitControls(camera, renderer.domElement);
   control.enableZoom = false;
   control.enablePan = false;
+  control.minPolarAngle = Math.PI/2;
+  control.maxPolarAngle = Math.PI/2;
   control.object.position.set(0, 0, 200);
   control.target.set(0, 0, 0);
   control.update();

@@ -128,7 +128,7 @@ function createTestimonyParagraph() {
 }
 
 function showContent(degree) {
-  // console.log(degree);
+  console.log(degree);
   for(i = 0; i < elementDegrees.length; i ++) {
     if (i == 0) {
       if (degree > elementDegrees[i][0] && degree < elementDegrees[i][1] && testimonyElements[i].style.opacity == '0') {
