@@ -106,11 +106,11 @@
   );
   shape-margin: 7%;
 }
-.text p {
+.text div {
   height: 100%;
   margin: 0;
 }
-.text p::before {
+.text div::before {
   content: "";
   width: 50%;
   height: 100%;
@@ -129,4 +129,9 @@
     50% 6%
   );
   shape-margin: 7%;
+}
+
+.text div p {
+  padding-top: 7% 0%;
+  margin: 0;
 }

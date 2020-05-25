@@ -23,7 +23,7 @@ function createMemorialContent(content) {
 
   if(content[2]){
     var portraitElem = document.createElement("div");
-    portraitElem.style.backgroundImage = "url('portraits/" + content[2] + "')";
+    portraitElem.style.backgroundImage = 'url(/images/portraits/' + content[2] + ')';
     portraitElem.className = "testimony_portrait";
 
     imageContainer.appendChild(portraitElem);
@@ -111,24 +111,25 @@ function createTestimonyText(testimonyContent) {
 }
 
 function isOverflown(element) {
-  return element.scrollHeight > element.clientHeight;
+  return element.scrollHeight > element.parentElement.clientHeight;
 }
 
 function createTestimonyParagraph() {
   var blockquoteElem = document.createElement("blockquote");
   blockquoteElem.className = "text";
-  var testimony_txtContainer = document.createElement("p");
+  var testimony_txtContainer = document.createElement("div");
+  var testimony_txt = document.createElement("p");
 
+  testimony_txtContainer.appendChild(testimony_txt);
   blockquoteElem.appendChild(testimony_txtContainer);
   testimonyContainer.appendChild(blockquoteElem);
 
   testimonyElements.push(blockquoteElem);
 
-  return testimony_txtContainer;
+  return testimony_txt;
 }
 
 function showContent(degree) {
-  console.log(degree);
   for(i = 0; i < elementDegrees.length; i ++) {
     if (i == 0) {
       if (degree > elementDegrees[i][0] && degree < elementDegrees[i][1] && testimonyElements[i].style.opacity == '0') {

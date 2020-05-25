@@ -21,7 +21,7 @@ hr {
   position: fixed;
   margin-top: var(--nav-margin);
   z-index: 999;
-  cursor: default;
+  cursor: pointer;
 }
 #mainHeader {
   margin-left: var(--nav-margin);
@@ -88,6 +88,7 @@ hr {
   color: #426282;
   text-align: left;
   transition: 0.5s background-color;
+  cursor: pointer;
 }
 .btn:hover {
   /* background-color: rgba(255, 255, 255, .5); */
@@ -131,10 +132,6 @@ hr {
 }
 #directions * {
   margin: 1em 1em;
-}
-#directions div:nth-child(2) {
-  cursor: pointer;
-  text-decoration: underline;
 }
 #main-container {
   position: absolute;
@@ -206,6 +203,4 @@ hr {
   margin-top: calc(var(--nav-margin) + 2em);
   margin-left: var(--nav-margin);
   visibility: hidden;
-  cursor: pointer;
-  text-decoration: underline;
 }
