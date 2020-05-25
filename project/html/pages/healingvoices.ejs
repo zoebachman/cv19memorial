@@ -8,18 +8,24 @@
     <% include ../helpers/menu %>
   </div>
 
-  <div class="container"></div>
+  <h1>Healing Voices</h1>
+
+  <div class="container">
   <% hvItems.forEach(function(item) { %>
   <div class="card" style="width: 18rem;">
    <a href="<%= item.link %>"><img src="../../images/<%= item.image %>" class="card-img-top" alt="<%= item.alt %>"></a>
     <div class="card-body">
-      <h5 class="card-title"><%= item.title %></h5>
+      <h4 class="card-title"><%= item.title %></h4>
       <p class="card-text"><%= item.desc %></p>
       <p class="card-date"><%= item.date %></p>
     </div>
   </div>
 
   <%}); %>
+  </div>
+
+  <div class="page-footer">
+    <% include ../helpers/footer %>
   </div>
 
 
