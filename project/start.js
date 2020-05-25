@@ -13,9 +13,6 @@ const md = require('markdown-it')({
   console.log(fm);
 });
 
-  
-
-
 const supportedLocales = [
   'en',
   'es'
@@ -66,6 +63,10 @@ app.get('/form', function (request, response) {
   response.render('pages/form');
 });
 
+app.get('/form-es', function (request, response) {
+  response.render('pages/form-es');
+});
+
 app.get('/healingvoices', function (request, response) {
   // load healing-voices.json
   const content = fs.readFileSync(__dirname + '/content/healing-voices.json');
@@ -73,6 +74,10 @@ app.get('/healingvoices', function (request, response) {
   response.render('pages/healingvoices', {
     hvItems: hvItems
   });
+});
+
+app.get('/valerie-smith', function (request, response) {
+  response.render('pages/valerie-smith');
 });
 
 app.get('/media', function (request, response) {

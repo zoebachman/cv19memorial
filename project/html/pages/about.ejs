@@ -8,7 +8,27 @@
   <div class="page-header">
     <% include ../helpers/menu %>
   </div>
-  <%- body %>
+
+  <div class="nav-container">
+    <div class="side-nav">
+      <a href="#Team">Team</a>
+      <a href="#Community-Advisory-Board">Community</a>
+      <a href="#Archive-Access">Archive Access</a>
+      <a href="#FAQ">FAQ</a>
+      <a href="#Contact">Contact</a>
+      <a href="#Legal">Legal</a>
+    </div>
+  </div>
+
+  <h1>About</h1>
+
+  <div id="about-body">
+    <%- body %>
+  </div>
+
+  <div class="page-footer">
+    <% include ../helpers/footer %>
+  </div>
 </body>
 
 </html>
