@@ -34,6 +34,24 @@ function createMemorialContent(content) {
     createTestimonyText(content[3].split(' '));
   }
 
+  var lastParagraph = testimonyElements[testimonyElements.length - 1].children[0];
+  var textNode = lastParagraph.firstChild;
+
+  var newParagraph = document.createElement("p");
+  newParagraph.appendChild(textNode);
+
+  removeChildren(lastParagraph);
+  lastParagraph.appendChild(newParagraph);
+
+  var textPadding = 0;
+
+  while(Math.round(newParagraph.scrollHeight) < lastParagraph.clientHeight) {
+    var newPadding = (lastParagraph.clientHeight - newParagraph.scrollHeight) / 2;
+    textPadding += newPadding;
+    newParagraph.style.paddingTop = textPadding + "px";
+    newParagraph.style.paddingBottom = textPadding + "px";
+  }
+
   // console.log(testimonyElements);
 
   testimonyElements[0].style.opacity = '1';
@@ -50,6 +68,21 @@ function createMemorialContent(content) {
 
     elementDegrees.push([i * angleIncrement, (i + 1) * angleIncrement]);
   }
+}
+
+function getTextNodeHeight(textNode) {
+  var height = 0;
+  if (document.createRange) {
+    var range = document.createRange();
+    range.selectNodeContents(textNode);
+    if (range.getBoundingClientRect) {
+      var rect = range.getBoundingClientRect();
+      if (rect) {
+          height = rect.bottom - rect.top;
+      }
+    }
+  }
+  return height;
 }
 
 function createHeaderElem(headerTxt, headerType, headerCont) {
@@ -118,7 +151,7 @@ function isOverflown(element) {
 function createTestimonyParagraph() {
   var blockquoteElem = document.createElement("blockquote");
   blockquoteElem.className = "text";
-  var testimony_txtContainer = document.createElement("p");
+  var testimony_txtContainer = document.createElement("div");
 
   blockquoteElem.appendChild(testimony_txtContainer);
   testimonyContainer.appendChild(blockquoteElem);
