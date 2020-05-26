@@ -98,6 +98,7 @@ function createTestimonyText(testimonyContent) {
     if (isOverflown(elem)) {
       elem.parentNode.parentNode.removeChild(elem.parentNode);
       testimonyElements.pop();
+
       var newContent = testimonyContent.slice(0, i - 1);
       var modifiedArray = testimonyContent.slice(i - 1);
 
@@ -111,22 +112,20 @@ function createTestimonyText(testimonyContent) {
 }
 
 function isOverflown(element) {
-  return element.scrollHeight > element.parentElement.clientHeight;
+  return element.scrollHeight > element.clientHeight;
 }
 
 function createTestimonyParagraph() {
   var blockquoteElem = document.createElement("blockquote");
   blockquoteElem.className = "text";
-  var testimony_txtContainer = document.createElement("div");
-  var testimony_txt = document.createElement("p");
+  var testimony_txtContainer = document.createElement("p");
 
-  testimony_txtContainer.appendChild(testimony_txt);
   blockquoteElem.appendChild(testimony_txtContainer);
   testimonyContainer.appendChild(blockquoteElem);
 
   testimonyElements.push(blockquoteElem);
 
-  return testimony_txt;
+  return testimony_txtContainer;
 }
 
 function showContent(degree) {
