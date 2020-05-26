@@ -10,7 +10,7 @@ var controls;
 var testimonyContent = [];
 
 var objects = [];
-var bubbleGradients = [[[255, 84, 79], [250, 209, 38]], [[91, 70, 129], [30, 147, 186]], [[30, 147, 186], [63, 178, 98]], [[91, 70, 129], [255, 84, 79]]];
+// var bubbleGradients = [[[255, 84, 79], [250, 209, 38]], [[91, 70, 129], [30, 147, 186]], [[30, 147, 186], [63, 178, 98]], [[91, 70, 129], [255, 84, 79]]];
 var animationDirections = [];
 var animateBbls = true;
 
@@ -110,8 +110,15 @@ function createTestimonial(data) {
     var testimony_data = allRows[i].match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g);
     if(testimony_data){
       var name, age, dod, location, type, img_src, testimony_txt;
-      if (testimony_data[1] == "Loss of loved one" && testimony_data[5] != "null") {
-        name = testimony_data[5] + " " + testimony_data[6];
+      if (testimony_data[1] == "Losing a loved one" && testimony_data[5] != "null") {
+
+        if (testimony_data[5] != "null" && testimony_data[6] != "null") {
+          name = testimony_data[5] + " " + testimony_data[6];
+        } else if (testimony_data[5] != "null") {
+          name = testimony_data[5];
+        } else if (testimony_data[6] != "null") {
+          name = testimony_data[6];
+        }
 
         if (testimony_data[8] != "null") {
           age = "Age: " + testimony_data[8] + ", ";
@@ -125,7 +132,14 @@ function createTestimonial(data) {
           dod = undefined;
         }
       } else {
-        name = testimony_data[2] + " " + testimony_data[3];
+
+        if (testimony_data[2] != "null" && testimony_data[3] != "null") {
+          name = testimony_data[2] + " " + testimony_data[3];
+        } else if (testimony_data[2] != "null") {
+          name = testimony_data[2];
+        } else if (testimony_data[3] != "null") {
+          name = testimony_data[3];
+        }
 
         if (testimony_data[4] != "null") {
           age = "Age: " + testimony_data[4];
@@ -181,8 +195,7 @@ function createBubbles() {
     if (testimonialImg) {
       image.style.backgroundImage = 'url(/images/portraits/' + testimonialImg + ')';
     } else {
-      var randGrad = Math.floor(Math.random() * bubbleGradients.length);
-      testimonial.style.background = 'linear-gradient(135deg, rgba(' + bubbleGradients[randGrad][0][0] + ', ' + bubbleGradients[randGrad][0][1] + ', ' + bubbleGradients[randGrad][0][2] + ', 0.55) 0%, rgba(' + bubbleGradients[randGrad][1][0] + ', ' + bubbleGradients[randGrad][1][1] + ', ' + bubbleGradients[randGrad][1][2] + ', 0.55) 100%)';
+      testimonial.style.background = 'linear-gradient(135deg, rgba(91, 70, 129, 0.55) 0%, rgba(30, 147, 186, 0.55) 100%)';
     }
 
     var text = document.createElement('span');

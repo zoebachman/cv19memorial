@@ -34,22 +34,25 @@ function createMemorialContent(content) {
     createTestimonyText(content[3].split(' '));
   }
 
-  var lastParagraph = testimonyElements[testimonyElements.length - 1].children[0];
-  var textNode = lastParagraph.firstChild;
+  var lastElement = testimonyElements[testimonyElements.length - 1].children[0];
 
-  var newParagraph = document.createElement("p");
-  newParagraph.appendChild(textNode);
+  if (lastElement.parentElement.className == "text") {
+    var textNode = lastElement.firstChild;
 
-  removeChildren(lastParagraph);
-  lastParagraph.appendChild(newParagraph);
+    var newParagraph = document.createElement("p");
+    newParagraph.appendChild(textNode);
 
-  var textPadding = 0;
+    removeChildren(lastElement);
+    lastElement.appendChild(newParagraph);
 
-  while(Math.round(newParagraph.scrollHeight) < lastParagraph.clientHeight) {
-    var newPadding = (lastParagraph.clientHeight - newParagraph.scrollHeight) / 2;
-    textPadding += newPadding;
-    newParagraph.style.paddingTop = textPadding + "px";
-    newParagraph.style.paddingBottom = textPadding + "px";
+    var textPadding = 0;
+
+    while(Math.round(newParagraph.scrollHeight) < lastElement.clientHeight) {
+      var newPadding = (lastElement.clientHeight - newParagraph.scrollHeight) / 2;
+      textPadding += newPadding;
+      newParagraph.style.paddingTop = textPadding + "px";
+      newParagraph.style.paddingBottom = textPadding + "px";
+    }
   }
 
   // console.log(testimonyElements);
