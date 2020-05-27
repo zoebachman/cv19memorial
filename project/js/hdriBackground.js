@@ -66,17 +66,17 @@ function loop() {
 }
 
 function getAngle(radian) {
-  if (firstDegree == null && radian != 0) {
-    firstDegree = radian;
-  }
-
-  if (firstDegree > 0) {
-    var angle = radian * (180/Math.PI);
-    if (angle < 0) {
-      angle = (180 + angle) + 180;
-    }
-    showContent(angle);
-  } else if (firstDegree < 0) {
+  // if (firstDegree == null && radian != 0) {
+  //   firstDegree = radian;
+  // }
+  //
+  // if (firstDegree > 0) {
+    // var angle = radian * (180/Math.PI);
+    // if (angle < 0) {
+    //   angle = (180 + angle) + 180;
+    // }
+    // showContent(angle);
+  // } else if (firstDegree < 0) {
     var angle = radian * (180/Math.PI);
     if (angle < 0) {
       angle = Math.abs(angle);
@@ -84,5 +84,5 @@ function getAngle(radian) {
       angle = (180 - angle) + 180;
     }
     showContent(angle);
-  }
+  // }
 }

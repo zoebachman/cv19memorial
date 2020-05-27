@@ -327,7 +327,7 @@ function fadeModal(direction, scene) {
         }
       } else {
         if(hasVisitedMemorial == false) {
-          directionScreen.children[0].children[0].innerHTML = "rotate to explore the memorial";
+          directionScreen.children[0].children[0].innerHTML = "rotate clockwise to reveal the testimony";
           directionScreen.style.background = 'rgba(0, 0, 0, 0.95)';
           directionScreen.style.color = '#f4eae0';
           directionScreen.children[1].style.color = '#f4eae0';
