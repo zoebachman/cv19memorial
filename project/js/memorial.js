@@ -165,25 +165,28 @@ function createTestimonyParagraph() {
 }
 
 function showContent(degree) {
-  for(i = 0; i < elementDegrees.length; i ++) {
-    if (i == 0) {
-      if (degree > elementDegrees[i][0] && degree < elementDegrees[i][1] && testimonyElements[i].style.opacity == '0') {
-        testimonyElements[testimonyElements.length - 1].style.opacity = '0';
-        testimonyElements[i].style.opacity = '1';
-        testimonyElements[i + 1].style.opacity = '0';
-      }
-    } else if (i == elementDegrees.length - 1) {
-      if (degree > elementDegrees[i][0] && degree < elementDegrees[i][1] && testimonyElements[i].style.opacity == '0') {
-        testimonyElements[i - 1].style.opacity = '0';
-        testimonyElements[i].style.opacity = '1';
-        testimonyElements[0].style.opacity = '0';
-      }
-    } else {
-      if(degree > elementDegrees[i][0] && degree < elementDegrees[i][1] && testimonyElements[i].style.opacity == '0') {
-        testimonyElements[i - 1].style.opacity = '0';
-        testimonyElements[i].style.opacity = '1';
-        testimonyElements[i + 1].style.opacity = '0';
+  if(elementDegrees != null && elementDegrees.length > 0) {
+    for(i = 0; i < elementDegrees.length; i ++) {
+      if (i == 0) {
+        if (degree > elementDegrees[i][0] && degree < elementDegrees[i][1] && testimonyElements[i].style.opacity == '0') {
+          testimonyElements[testimonyElements.length - 1].style.opacity = '0';
+          testimonyElements[i].style.opacity = '1';
+          testimonyElements[i + 1].style.opacity = '0';
+        }
+      } else if (i == elementDegrees.length - 1) {
+        if (degree > elementDegrees[i][0] && degree < elementDegrees[i][1] && testimonyElements[i].style.opacity == '0') {
+          testimonyElements[i - 1].style.opacity = '0';
+          testimonyElements[i].style.opacity = '1';
+          testimonyElements[0].style.opacity = '0';
+        }
+      } else {
+        if(degree > elementDegrees[i][0] && degree < elementDegrees[i][1] && testimonyElements[i].style.opacity == '0') {
+          testimonyElements[i - 1].style.opacity = '0';
+          testimonyElements[i].style.opacity = '1';
+          testimonyElements[i + 1].style.opacity = '0';
+        }
       }
     }
   }
+
 }
