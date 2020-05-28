@@ -163,13 +163,6 @@ hr {
   filter: blur(40px);
   cursor: pointer;
 }
-.testimonialImage:hover {
-  -webkit-filter: blur(10px);
-  -moz-filter: blur(10px);
-  -o-filter: blur(10px);
-  -ms-filter: blur(10px);
-  filter: blur(10px);
-}
 #cursorTextContainer {
   position: absolute;
   display: none;
@@ -186,9 +179,10 @@ hr {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0);
   z-index: 998;
+  background-color: rgba(0, 0, 0, 0);
   visibility: hidden;
+  transition: background-color 1.5s ease-in-out;
 }
 #memorial-scene {
   position: absolute;
@@ -203,4 +197,13 @@ hr {
   margin-top: calc(var(--nav-margin) + 2em);
   margin-left: var(--nav-margin);
   visibility: hidden;
+}
+@media not all and (pointer: coarse) {
+  .testimonialImage:hover {
+    -webkit-filter: blur(10px);
+    -moz-filter: blur(10px);
+    -o-filter: blur(10px);
+    -ms-filter: blur(10px);
+    filter: blur(10px);
+  }
 }

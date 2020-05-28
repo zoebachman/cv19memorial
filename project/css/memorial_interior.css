@@ -5,6 +5,8 @@
   transform: translate(-50%, 0%);
   width: 45%;
   height: 100%;
+  visibility: visible;
+  opacity: 1;
 }
 #content-container {
   position: relative;
@@ -19,7 +21,6 @@
   font-style: italic;
 }
 #testimony__info{
-  opacity: 1;
   transition: opacity 0.5s ease-in-out;
 }
 .personal__info {
@@ -36,7 +37,7 @@
 .personal__info * {
   text-align: center;
   font-weight: 600;
-  margin: 0.25em 0;
+  margin: 0.5em 1.25em;
 }
 .testimony__type {
   position: absolute;

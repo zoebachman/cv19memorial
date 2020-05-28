@@ -5,12 +5,13 @@ import { TWEEN } from '/js/three/jsm/libs/tween.module.min.js';
 import { CSS3DRenderer, CSS3DSprite } from '/js/three/jsm/renderers/CSS3DRenderer.js';
 
 var css_camera, css_scene, css_renderer;
-var controls;
+var css_controls;
+
+var lastCamPos;
 
 var testimonyContent = [];
 
 var objects = [];
-// var bubbleGradients = [[[255, 84, 79], [250, 209, 38]], [[91, 70, 129], [30, 147, 186]], [[30, 147, 186], [63, 178, 98]], [[91, 70, 129], [255, 84, 79]]];
 var animationDirections = [];
 var animateBbls = true;
 
@@ -27,22 +28,34 @@ var hasVisitedMemorial = false;
 initiate();
 
 window.onload = function() {
-  mainScene.addEventListener("mouseover", function (event) {
-    onTestimonialMouseIn(event);
-  });
-  mainScene.addEventListener("mouseout", function (event) {
-    onTestimonialMouseOut(event);
-  });
-  mainScene.addEventListener("click", function (event) {
-    onTestimonialClick(event);
-  });
   returnBtn.addEventListener("click", function (event) {
-    fadeModal("in", "main");
+    directionAppearance('hidden', '0', null);
+    fadeTo("main");
+    zoomTestimonial("out", lastCamPos , 1000);
+    animateBbls = !animateBbls;
   });
+
   directionScreen.children[1].addEventListener("click", function (event) {
     directionAppearance('hidden', '0', 'opacity 1s ease-in-out, visibility 0s linear 1s');
   });
+
+  window.addEventListener( 'resize', onWindowResize, false );
+
   calculateOverlay(window.innerWidth);
+}
+
+function onWindowResize() {
+  location.reload();
+}
+
+function calculateOverlay(winWidth) {
+  if (winWidth <= 600) {
+    overlay.style.width = "80%"
+  } else if (winWidth > 600 && winWidth < 1200) {
+    overlay.style.width = (80 - ((winWidth - 600) * 0.042)) + "%";
+  } else if (winWidth >= 1200) {
+    overlay.style.width = "45%";
+  }
 }
 
 function initiate() {
@@ -54,8 +67,6 @@ function initiate() {
     dataType: 'text',
   }).done(createTestimonial);
   animate();
-
-  window.addEventListener( 'resize', onWindowResize, false );
 }
 
 function createCssScene() {
@@ -73,13 +84,13 @@ function createRenderer() {
 }
 
 function createControl() {
-  controls = new TrackballControls(css_camera, css_renderer.domElement );
+  css_controls = new TrackballControls(css_camera, css_renderer.domElement );
 }
 
 function animate() {
   requestAnimationFrame( animate );
 
-  controls.update();
+  css_controls.update();
 
   if(animateBbls) {
     animateBubbles();
@@ -88,20 +99,6 @@ function animate() {
   TWEEN.update();
 
   css_renderer.render( css_scene, css_camera );
-}
-
-function onWindowResize() {
-  location.reload();
-}
-
-function calculateOverlay(winWidth) {
-  if (winWidth <= 600) {
-    overlay.style.width = "70%"
-  } else if (winWidth > 600 && winWidth < 1200) {
-    overlay.style.width = (70 - ((winWidth - 600) * 0.042)) + "%";
-  } else if (winWidth >= 1200) {
-    overlay.style.width = "45%";
-  }
 }
 
 function createTestimonial(data) {
@@ -210,6 +207,11 @@ function createBubbles() {
     object.position.z = Math.random() * 4000 - 2000;
     css_scene.add( object );
 
+    object.element.onclick = function() { onTestimonialClick(this)};
+    object.element.onmouseover = function() { onTestimonialMouseIn(this)};
+    object.element.onmouseout = function() { onTestimonialMouseOut()};
+    object.element.ontouchstart = function() { onTestimonialClick(this)};
+
     objects.push( object );
 
     var bubbleDirection = {
@@ -240,107 +242,102 @@ function animateBubbles() {
   }
 }
 
-function onTestimonialMouseIn(evt) {
-  if(evt.target &&  evt.target.className == "testimonial testimonialImage"){
-    var testimonialContainer = evt.target.parentNode;
-    var testimonialText = testimonialContainer.childNodes[1];
+function onTestimonialMouseIn(testimonialContainer) {
+  var testimonialText = testimonialContainer.childNodes[1];
 
-    toolTipTextContainer.innerHTML = testimonialText.innerHTML;
-    toolTipTextContainer.style.top = evt.clientY + "px";
-    toolTipTextContainer.style.left = evt.clientX + "px";
-    toolTipTextContainer.style.display = "block";
-  }
+  toolTipTextContainer.innerHTML = testimonialText.innerHTML;
+  toolTipTextContainer.style.top = event.clientY + "px";
+  toolTipTextContainer.style.left = event.clientX + "px";
+  toolTipTextContainer.style.display = "block";
 }
 
-function onTestimonialMouseOut(evt) {
-  if(evt.target &&  evt.target.className == "testimonial testimonialImage"){
-    toolTipTextContainer.style.display = "none";
-  }
+function onTestimonialMouseOut() {
+  toolTipTextContainer.style.display = "none";
 }
 
-function onTestimonialClick(evt) {
-  if(evt.target &&  evt.target.className == "testimonial testimonialImage"){
-    var testimonialContainer = evt.target.parentNode;
-    var testimonialIndex = Array.from(testimonialContainer.parentElement.children).indexOf(testimonialContainer);
+function onTestimonialClick(testimonialContainer) {
+  var testimonialIndex = Array.from(testimonialContainer.parentElement.children).indexOf(testimonialContainer);
 
-    beginTestimonialTransition(objects[testimonialIndex]);
-    createMemorialContent(testimonyContent[testimonialIndex]);
-  }
+  animateBbls = !animateBbls;
+
+  beginTestimonialTransition(objects[testimonialIndex]);
+  createMemorialContent(testimonyContent[testimonialIndex]);
 }
 
 function beginTestimonialTransition(testimonial) {
-  var position = controls.target;
+  var position = css_controls.target;
   var target = testimonial.position;
   var tween = new TWEEN.Tween(position).to(target, 500);
 
   toolTipTextContainer.style.display = "none";
 
   tween.onUpdate(function(){
-    controls.target = position;
+    css_controls.target = position;
   });
 
   tween.onComplete(function(){
-    fadeModal("in", "memorial");
-    zoomTestimonial("in", target);
+    lastCamPos = { x:css_camera.position.x, y:css_camera.position.y, z:css_camera.position.z };
+    zoomTestimonial("in", target, 0);
+    fadeTo("memorial");
   });
 
   tween.start();
 }
 
-function zoomTestimonial(direction, target) {
+function zoomTestimonial(direction, target, delay) {
   var cam = css_camera.position;
-  var target =  direction == "in" ? target : {x : target.position.x, y : target.position.y, z : 2000};
-  var zTween = new TWEEN.Tween(cam).to(target, 1000);
+  var newTarget;
+  var zTween;
+
+  if (direction == "in") {
+    if (target.z > cam.z) {
+      newTarget = {x : target.x, y : target.y, z : (target.z - 200)};
+    } else if (target.z < cam.z) {
+      newTarget = {x : target.x, y : target.y, z : (target.z + 200)};
+    }
+    zTween = new TWEEN.Tween(cam).to(newTarget, 1000).delay(delay);
+  } else {
+    zTween = new TWEEN.Tween(cam).to(target, 1000).delay(delay);
+  }
 
   zTween.onUpdate(function(){
+    css_camera.position.x = cam.x;
+    css_camera.position.y = cam.y;
     css_camera.position.z = cam.z;
   });
 
   zTween.start();
 }
 
-function fadeModal(direction, scene) {
-  var currentOpacity = { percentage : direction == "in" ? 0 : 1 };
-  var transitionOpacity = { percentage : direction == "in" ? 1 : 0 };
+function fadeTo(scene) {
   var sceneToShow = scene == "memorial" ? memorialScene : mainScene;
   var sceneToHide = scene == "memorial" ? mainScene : memorialScene;
-  var btnViz = scene == "memorial" ? 'visible' : 'hidden';
-  var fadeTween = new TWEEN.Tween(currentOpacity).to(transitionOpacity, 1100);
 
   fadeToDiv.style.visibility = 'visible';
-  fadeTween.start();
-
-  fadeTween.onUpdate(function(){
-    fadeToDiv.style.backgroundColor = 'rgba(0, 0, 0, ' + currentOpacity.percentage + ')';
-  });
-
-  fadeTween.onComplete(function() {
-    if (direction == "in") {
-      animateBbls = !animateBbls;
-      fadeModal("out", scene);
-      if (scene == "main") {
-        resetMemorialControls();
-        zoomTestimonial("out", css_camera);
-        if(hasVisitedMemorial == false) {
-          directionAppearance('hidden', '0', null);
-          hasVisitedMemorial = true;
-        }
-      } else {
-        if(hasVisitedMemorial == false) {
-          directionScreen.children[0].children[0].innerHTML = "rotate clockwise to reveal the testimony";
-          directionScreen.style.background = 'rgba(0, 0, 0, 0.95)';
-          directionScreen.style.color = '#f4eae0';
-          directionScreen.children[1].style.color = '#f4eae0';
-          directionAppearance('visible', '1', null);
-        }
-      }
-      sceneToShow.style.left= '0em';
-      sceneToHide.style.left = '-999em';
-      returnBtn.style.visibility = btnViz;
+  fadeToDiv.style.backgroundColor = 'rgba(0, 0, 0, 1)';
+  setTimeout(function() {
+    fadeToDiv.style.backgroundColor = 'rgba(0, 0, 0, 0)';
+    sceneToShow.style.left= '0em';
+    sceneToHide.style.left = '-999em';
+    if (scene == "main") {
+      resetMemorialControls();
+      returnBtn.style.visibility = 'hidden';
     } else {
-      fadeToDiv.style.visibility = 'hidden';
+      if (hasVisitedMemorial == false) {
+        directionScreen.children[0].children[0].innerHTML = "rotate clockwise to reveal the testimony";
+        directionScreen.style.background = 'rgba(0, 0, 0, 0.95)';
+        directionScreen.style.color = '#f4eae0';
+        directionScreen.children[1].style.color = '#f4eae0';
+        directionAppearance('visible', '1', null);
+        hasVisitedMemorial = true;
+      }
+      memorialOverlay.style.visibility = "visible";
+      returnBtn.style.visibility = 'visible';
     }
-  });
+    setTimeout(function() {
+      fadeToDiv.style.visibility = 'hidden';
+    }, 1000);
+  }, 1000);
 }
 
 function directionAppearance(visibility, opacity, transition) {
@@ -351,13 +348,4 @@ function directionAppearance(visibility, opacity, transition) {
   }
   directionScreen.style.opacity = opacity;
   directionScreen.style.visibility = visibility;
-}
-
-function resetMemorialControls() {
-  control.reset();
-  control.enableZoom = false;
-  control.enablePan = false;
-  control.object.position.set(0, 0, 200);
-  control.target.set(0, 0, 0);
-  control.update();
 }

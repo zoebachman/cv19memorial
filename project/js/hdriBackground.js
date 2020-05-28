@@ -1,5 +1,5 @@
 var scene, camera, fieldOfView, aspectRatio, nearPlane, farPlane,
-    renderer, container, control, firstDegree;
+    renderer, container, control, currentDegree;
 
 var WIDTH, HEIGHT;
 
@@ -66,23 +66,11 @@ function loop() {
 }
 
 function getAngle(radian) {
-  // if (firstDegree == null && radian != 0) {
-  //   firstDegree = radian;
-  // }
-  //
-  // if (firstDegree > 0) {
-    // var angle = radian * (180/Math.PI);
-    // if (angle < 0) {
-    //   angle = (180 + angle) + 180;
-    // }
-    // showContent(angle);
-  // } else if (firstDegree < 0) {
-    var angle = radian * (180/Math.PI);
-    if (angle < 0) {
-      angle = Math.abs(angle);
-    } else {
-      angle = (180 - angle) + 180;
-    }
-    showContent(angle);
-  // }
+  var angle = radian * (180/Math.PI);
+  if (angle <= 0) {
+    angle = Math.abs(angle);
+  } else {
+    angle = (180 - angle) + 180;
+  }
+  showContent(angle);
 }
