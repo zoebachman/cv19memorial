@@ -39,22 +39,20 @@ function createMemorialContent(content) {
   if (lastElement.parentElement.className == "text") {
     var textNode = lastElement.firstChild;
 
-    if (getTextNodeHeight(textNode) < lastElement.scrollHeight) {
-      var newParagraph = document.createElement("p");
+    var newParagraph = document.createElement("p");
 
-      newParagraph.appendChild(textNode);
+    newParagraph.appendChild(textNode);
 
-      removeChildren(lastElement);
-      lastElement.appendChild(newParagraph);
+    removeChildren(lastElement);
+    lastElement.appendChild(newParagraph);
 
-      var textPadding = 0;
+    var textPadding = 0;
 
-      while(Math.round(newParagraph.scrollHeight) < lastElement.clientHeight) {
-        var newPadding = (lastElement.clientHeight - newParagraph.scrollHeight) / 2;
-        textPadding += newPadding;
-        newParagraph.style.paddingTop = textPadding + "px";
-        newParagraph.style.paddingBottom = textPadding + "px";
-      }
+    while(Math.round(newParagraph.scrollHeight) < lastElement.clientHeight) {
+      var newPadding = (lastElement.clientHeight - newParagraph.scrollHeight) / 2;
+      textPadding += newPadding;
+      newParagraph.style.paddingTop = textPadding + "px";
+      newParagraph.style.paddingBottom = textPadding + "px";
     }
   }
 
@@ -121,18 +119,20 @@ function createTestimonyText(testimonyContent) {
   var elem = createTestimonyParagraph();
 
   for (var i = 0; i < testimonyContent.length; i++) {
+    elem.innerHTML += (testimonyContent[i] + ' ');
+    // console.log(elem.scrollHeight, elem.clientHeight);
     if (isOverflown(elem)) {
       elem.parentNode.parentNode.removeChild(elem.parentNode);
       testimonyElements.pop();
 
-      var newContent = testimonyContent.slice(0, i - 1);
-      var modifiedArray = testimonyContent.slice(i - 1);
+      var newContent = testimonyContent.slice(0, i);
+      var modifiedArray = testimonyContent.slice(i);
+
+      // console.log("overflow detected at " + testimonyContent[i]);
 
       createTestimonyText(newContent);
       createTestimonyText(modifiedArray);
       break;
-    } else {
-      elem.innerHTML += (testimonyContent[i] + ' ');
     }
   }
 }

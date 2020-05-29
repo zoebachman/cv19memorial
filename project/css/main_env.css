@@ -76,15 +76,12 @@ hr {
   z-index: 999;
   cursor: default;
 }
-.nav .testimony {
+.testimony {
   display: flex;
   flex-direction: column;
 }
 .btn {
   display: inline-block;
-  border-radius: 5%;
-  /* padding: 0.5em;
-  margin: -0.5em; */
   color: #426282;
   text-align: left;
   transition: 0.5s background-color;
