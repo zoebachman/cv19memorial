@@ -1,5 +1,5 @@
 var scene, camera, fieldOfView, aspectRatio, nearPlane, farPlane,
-    renderer, container, control, currentDegree;
+    renderer, container, control, lastDegree;
 
 var WIDTH, HEIGHT;
 
@@ -72,5 +72,9 @@ function getAngle(radian) {
   } else {
     angle = (180 - angle) + 180;
   }
-  showContent(angle);
+
+  if(angle != lastDegree) {
+    showContent(angle);
+    lastDegree = angle;
+  }
 }

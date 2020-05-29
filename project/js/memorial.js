@@ -171,7 +171,7 @@ function getTextNodeHeight(textNode) {
 
 function showContent(degree) {
   if(elementDegrees != null && elementDegrees.length > 0) {
-    // console.log(degree);
+    console.log("angle in memorial " + degree);
     for (i = 0; i < elementDegrees.length; i ++) {
       if (degree >= elementDegrees[i][0] && degree < elementDegrees[i][1]) {
         if (testimonyElements[i].style.opacity != '1') {
