@@ -29,7 +29,6 @@ initiate();
 
 window.onload = function() {
   returnBtn.addEventListener("click", function (event) {
-    directionAppearance('hidden', '0', null);
     fadeTo("main");
     zoomTestimonial("out", lastCamPos , 1000);
     animateBbls = !animateBbls;
@@ -106,7 +105,7 @@ function createTestimonial(data) {
   for(var i = 0; i < allRows.length; i ++) {
     var testimony_data = allRows[i].match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g);
     if(testimony_data){
-      var name, age, dod, location, type, img_src, testimony_txt;
+      var name, age, dod, location, type, img_src, media_src = undefined, testimony_txt;
       if (testimony_data[1] == "Losing a loved one" && testimony_data[5] != "null") {
 
         if (testimony_data[5] != "null" && testimony_data[6] != "null") {
@@ -143,7 +142,6 @@ function createTestimonial(data) {
         } else {
           age = undefined;
         }
-
         dod = undefined;
       }
 
@@ -154,14 +152,21 @@ function createTestimonial(data) {
           location = testimony_data[12].replace(/['"]+/g, '') + ", " + testimony_data[11] ;
         }
       } else {
-
         location = undefined;
       }
 
       type = testimony_data[1];
 
       if (testimony_data[10] != "null") {
-        img_src = testimony_data[10].substring(testimony_data[10].lastIndexOf("/") + 1, testimony_data[10].length);
+        var media_ref = testimony_data[10].substring(testimony_data[10].lastIndexOf("/") + 1, testimony_data[10].length);
+        var media_type = media_ref.substring(media_ref.lastIndexOf(".") + 1, media_ref.length);
+
+        if(media_type == "mp4") {
+          img_src = undefined;
+          media_src = media_ref;
+        } else {
+          img_src = media_ref;
+        }
       } else {
         img_src = undefined;
       }
@@ -172,7 +177,7 @@ function createTestimonial(data) {
         testimony_txt = undefined;
       }
 
-      testimonyContent.push([[name, age, dod, location], type, img_src, testimony_txt]);
+      testimonyContent.push([[name, age, dod, location], type, img_src, media_src, testimony_txt]);
     }
   }
   createBubbles();
@@ -322,6 +327,7 @@ function fadeTo(scene) {
     if (scene == "main") {
       resetMemorialControls();
       returnBtn.style.visibility = 'hidden';
+      directionAppearance('hidden', '0', null);
     } else {
       if (hasVisitedMemorial == false) {
         directionScreen.children[0].children[0].innerHTML = "rotate clockwise to reveal the testimony";

@@ -1,7 +1,7 @@
 var testimonyInfo_container = document.getElementById("testimony__info");
 var personalInfo_container = testimonyInfo_container.children[0];
 var testimonyType_container = testimonyInfo_container.children[1];
-var imageContainer = document.getElementById("testimony_img");
+var mediaContainer = document.getElementById("testimony_media");
 var testimonyContainer = document.getElementById("testimony-wrapper");
 
 var testimonyElements;
@@ -12,7 +12,7 @@ function createMemorialContent(content) {
   testimonyElements = [];
   elementDegrees = [];
 
-  removeChildren([personalInfo_container, testimonyType_container, imageContainer, testimonyContainer]);
+  removeChildren([personalInfo_container, testimonyType_container, mediaContainer, testimonyContainer]);
 
   createHeaderElem([content[0][0]], "H2", personalInfo_container);
   createHeaderElem([content[0][1], content[0][2]], "H3", personalInfo_container);
@@ -26,12 +26,16 @@ function createMemorialContent(content) {
     portraitElem.style.backgroundImage = 'url(/images/portraits/' + content[2] + ')';
     portraitElem.className = "testimony_portrait";
 
-    imageContainer.appendChild(portraitElem);
-    testimonyElements.push(imageContainer);
+    mediaContainer.appendChild(portraitElem);
+    testimonyElements.push(mediaContainer);
   }
 
   if (content[3]) {
-    createTestimonyText(content[3].split(' '));
+    createVideo(content[3]);
+  }
+
+  if (content[4]) {
+    createTestimonyText(content[4].split(' '));
   }
 
   var lastElement = testimonyElements[testimonyElements.length - 1].children[0];
@@ -105,6 +109,26 @@ function createHeaderElem(headerTxt, headerType, headerCont) {
   }
 }
 
+function createVideo(vid_content){
+  var videoElem = document.createElement("VIDEO");
+  var poster_src = vid_content.substring(0, vid_content.lastIndexOf("."));
+
+  videoElem.src = "/images/portraits/" + vid_content;
+  videoElem.poster = "/images/portraits/vid_thumbnails/" + poster_src + ".png";
+
+  mediaContainer.appendChild(videoElem);
+
+  videoElem.onclick = function() {
+    if (videoElem.paused && mediaContainer.style.opacity == '1') {
+      videoElem.play();
+    } else {
+      videoElem.pause();
+    }
+  };
+
+  testimonyElements.push(mediaContainer);
+}
+
 function createTestimonyTxtElem(content, elemType, container, testimonyElemContainer) {
   if (content) {
     var dom_el = document.createElement(elemType);
@@ -162,7 +186,7 @@ function getTextNodeHeight(textNode) {
     if (range.getBoundingClientRect) {
       var rect = range.getBoundingClientRect();
       if (rect) {
-          height = rect.bottom - rect.top;
+        height = rect.bottom - rect.top;
       }
     }
   }
@@ -171,7 +195,7 @@ function getTextNodeHeight(textNode) {
 
 function showContent(degree) {
   if(elementDegrees != null && elementDegrees.length > 0) {
-    console.log("angle in memorial " + degree);
+    // console.log("angle in memorial " + degree);
     for (i = 0; i < elementDegrees.length; i ++) {
       if (degree >= elementDegrees[i][0] && degree < elementDegrees[i][1]) {
         if (testimonyElements[i].style.opacity != '1') {
@@ -180,6 +204,9 @@ function showContent(degree) {
       } else {
         if (testimonyElements[i].style.opacity != '0') {
           testimonyElements[i].style.opacity = '0';
+          if (testimonyElements[i] == mediaContainer && testimonyElements[i].children[0].tagName == "VIDEO" && !testimonyElements[i].children[0].paused) {
+            testimonyElements[i].children[0].pause();
+          }
         }
       }
     }
