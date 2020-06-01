@@ -110,11 +110,6 @@ nav {
   justify-content: space-between;
 }
 
-#menu-container {
-  padding-top: .5rem;
-  padding-right: 1rem;
-}
-
 .icon:hover {
   fill: #42628294;
   height: 30px;
