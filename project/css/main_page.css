@@ -127,7 +127,7 @@ nav {
   transition: background 0.2s ease, color 0.2s ease;
 }
 
-svg{
+svg {
   fill: #426282;
   height: 30px;
   opacity: 1;
@@ -147,7 +147,11 @@ svg:not(:root) {
 /* MAIN ENVIRONMENT */
 
 /* MEMORIAL INTERIOR */
-.personal__info h1, h2, h3, h4, h5 {
+.personal__info h1, 
+.personal__info h2, 
+.personal__info h3, 
+.personal__info h4, 
+.personal__info h5 {
   font-weight: 600;
   font-style: italic;
   color: white;
