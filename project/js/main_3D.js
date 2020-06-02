@@ -177,7 +177,7 @@ function createTestimonial(data) {
         testimony_txt = undefined;
       }
 
-      testimonyContent.push([[name, age, dod, location], type, img_src, media_src, testimony_txt]);
+      testimonyContent.push([[name, age, dod, location], type, media_src, img_src, testimony_txt]);
     }
   }
   createBubbles();
@@ -186,7 +186,7 @@ function createTestimonial(data) {
 function createBubbles() {
   for (var i = 0; i < testimonyContent.length; i ++) {
     var name = testimonyContent[i][0][0];
-    var testimonialImg = testimonyContent[i][2];
+    var testimonialImg = testimonyContent[i][3];
 
     var testimonial = document.createElement('div');
     testimonial.className = 'testimonial testimonialContainer';
@@ -281,7 +281,7 @@ function beginTestimonialTransition(testimonial) {
   });
 
   tween.onComplete(function(){
-    lastCamPos = { x:css_camera.position.x, y:css_camera.position.y, z:css_camera.position.z };
+    lastCamPos = { x: css_camera.position.x, y: css_camera.position.y, z: css_camera.position.z };
     zoomTestimonial("in", target, 0);
     fadeTo("memorial");
   });

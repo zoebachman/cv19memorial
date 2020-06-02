@@ -12,6 +12,10 @@ function createMemorialContent(content) {
   testimonyElements = [];
   elementDegrees = [];
 
+  if(mediaContainer.children.length > 0 && mediaContainer.children[0].tagName == "VIDEO") {
+    mediaContainer.onclick = null;
+  }
+
   removeChildren([personalInfo_container, testimonyType_container, mediaContainer, testimonyContainer]);
 
   createHeaderElem([content[0][0]], "H2", personalInfo_container);
@@ -21,17 +25,16 @@ function createMemorialContent(content) {
 
   testimonyElements.push(testimonyInfo_container);
 
-  if(content[2]){
+  if (content[2]) {
+    createVideo(content[2]);
+  }
+
+  if (content[3]){
     var portraitElem = document.createElement("div");
-    portraitElem.style.backgroundImage = 'url(/images/portraits/' + content[2] + ')';
-    portraitElem.className = "testimony_portrait";
+    portraitElem.style.backgroundImage = 'url(/images/portraits/' + content[3] + ')';
 
     mediaContainer.appendChild(portraitElem);
     testimonyElements.push(mediaContainer);
-  }
-
-  if (content[3]) {
-    createVideo(content[3]);
   }
 
   if (content[4]) {
@@ -111,17 +114,20 @@ function createHeaderElem(headerTxt, headerType, headerCont) {
 
 function createVideo(vid_content){
   var videoElem = document.createElement("VIDEO");
-  var poster_src = vid_content.substring(0, vid_content.lastIndexOf("."));
+  var posterElem = document.createElement("div");
 
+  posterElem.style.backgroundImage = 'url(/images/icons/vid_overlay.png)';
   videoElem.src = "/images/portraits/" + vid_content;
-  videoElem.poster = "/images/portraits/vid_thumbnails/" + poster_src + ".png";
 
   mediaContainer.appendChild(videoElem);
+  mediaContainer.appendChild(posterElem);
 
-  videoElem.onclick = function() {
+  mediaContainer.onclick = function() {
     if (videoElem.paused && mediaContainer.style.opacity == '1') {
+      mediaContainer.children[1].style.visibility = 'hidden';
       videoElem.play();
     } else {
+      mediaContainer.children[1].style.visibility = 'visible';
       videoElem.pause();
     }
   };
@@ -206,6 +212,7 @@ function showContent(degree) {
           testimonyElements[i].style.opacity = '0';
           if (testimonyElements[i] == mediaContainer && testimonyElements[i].children[0].tagName == "VIDEO" && !testimonyElements[i].children[0].paused) {
             testimonyElements[i].children[0].pause();
+            testimonyElements[i].children[1].style.visibility = 'visible';
           }
         }
       }
