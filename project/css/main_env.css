@@ -41,14 +41,11 @@ hr {
   font-weight: 600;
 }
 #menu-container:hover .menu-content {
-  visibility: visible;
-  opacity: 1;
+  display: block;
 }
 .menu-content {
   font-weight: 500;
-  display: block;
-  visibility: hidden;
-  opacity: 0;
+  display: none;
   transition: 0.5s opacity;
   padding-bottom: 2em; /* give mouse a little wiggle room */
   padding-left: 2em; /* give mouse a little wiggle room */
