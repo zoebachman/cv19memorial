@@ -53,8 +53,6 @@ Los datos son proporcionados por los que perdieron a alguien en COVID-19, los qu
 [Cv19memorial Archive Accessform (pdf)](../images/pdfs/cv19memorialDataUseAgreement_Sample.pdf)  
 [Form Flowchart (pdf)](../images/pdfs/cv19memorial_Form_Flowchart.pdf) 
 
-Los interesados en acceder al conjunto de datos deben completar [la solicitud](https://cv19memorial.typeform.com/to/m3p8Qn).
-
 ### Solicitud para Acceso al Archivo (ESP)
 ##### Criterios de Evaluación
 Las solicitudes deben:
@@ -78,7 +76,7 @@ La aprobación de un proyecto de investigación por parte de cv19memorial a trav
 #### Difusión
 El (los) solicitante(s) debe(n) presentar a cv19memorial una copia electrónica de todos y cada uno de los informes, presentaciones y publicaciones basados en los datos antes del momento de la publicación/presentación. cv19memorial se reserva el derecho de difundir sus conclusiones en su sitio web en una forma compatible con cualquier acuerdo de derechos de autor, si lo hubiera. Bajo ninguna circunstancia los investigadores podrán compartir los datos con nadie que no haya sido aprobado para el acceso por cv19memorial.
 
-
+Los interesados en acceder al conjunto de datos deben completar [la solicitud](https://cv19memorial.typeform.com/to/m3p8Qn).
 
 ## <a name="Preguntas"></a> Preguntas frecuentes
 ​​​​​​​### ¿No estamos en tu idioma?

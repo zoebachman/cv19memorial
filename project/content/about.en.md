@@ -22,7 +22,7 @@ cv19memorial is a digital and transnational space to share experiences of loss d
 **Access** to the means to mourn while physically distant   
 **Representation** of the stories behind the statistics  
 **Transnationalism** and solidarity during a shared trauma  
-**Collectivity** of healing through transcultural observance 
+**Collectivity** of healing through transcultural observance   
 **Honesty** in the portrayal of a crisis that has unequally impacted people  
 **Justice** for the deceased and their families  
 
@@ -53,8 +53,7 @@ Submissions are provided by those who lost someone to COVID-19, those who surviv
 
 [Cv19memorial Archive Accessform (pdf)](../images/pdfs/cv19memorialDataUseAgreement_Sample.pdf)  
 [Form Flowchart (pdf)](../images/pdfs/cv19memorial_Form_Flowchart.pdf) 
-
-Those interested in accessing the dataset should complete the following [application](https://cv19memorial.typeform.com/to/m3p8Qn). Email <a href="mailto:info@cv19memorial.org">info@cv19memorial.org</a> with any questions. 
+ 
 
 ### Archive Access Application
 
@@ -81,6 +80,7 @@ Approval of a research project by cv19memorial via this form and provision of da
 #### Dissemination
 The applicant(s) must submit an electronic copy to cv19memorial of any and all reports, presentations, and publications based on the data prior to the time of publication/presentation. cv19memorial reserves the right to disseminate your findings on its website in a form compatible with any copyright agreement, if any. Under no circumstances may researchers share the data with anyone who has not been approved for access by cv19memorial.
 
+Those interested in accessing the dataset should complete the [application](https://cv19memorial.typeform.com/to/m3p8Qn). Email <a href="mailto:info@cv19memorial.org">info@cv19memorial.org</a> with any questions.
 
 ## <a name="FAQ"></a>FAQ
 ### Not In Your Language?
