@@ -19,12 +19,12 @@ toc:
 cv19memorial is a digital and transnational space to share experiences of loss during COVID-19. In a time marked by physical distance, we're exploring ways of expressing pain through personal testimony. We invite you to add words, photos, mementos on grief and witness others' contributions. Our team recognizes that this crisis does not affect all equally and is made worse for many through systemic inequality. We hope you will trust our commitment to representing your stories.
 
 ### Our Values
-Access to the means to mourn while physically distant 
-Representation of the stories behind the statistics
-Transnationalism and solidarity during a shared trauma
-Collectivity of healing through transcultural observance
-Honesty in the portrayal of a crisis that has unequally impacted people
-Justice for the deceased and their families
+**Access** to the means to mourn while physically distant   
+**Representation** of the stories behind the statistics  
+**Transnationalism** and solidarity during a shared trauma  
+**Collectivity** of healing through transcultural observance   
+**Honesty** in the portrayal of a crisis that has unequally impacted people  
+**Justice** for the deceased and their families  
 
 ### Who We Are
 We are a team of activists, artists, designers and researchers committed to human rights defense and with ample experience in the development of memorials, participatory processes and interactive platforms. We live in Mexico, the UK, Canada and the USA. We are also people like you, deeply affected and grieving during the COVID-19 crisis who care about telling this story.
@@ -53,8 +53,7 @@ Submissions are provided by those who lost someone to COVID-19, those who surviv
 
 [Cv19memorial Archive Accessform (pdf)](../images/pdfs/cv19memorialDataUseAgreement_Sample.pdf)  
 [Form Flowchart (pdf)](../images/pdfs/cv19memorial_Form_Flowchart.pdf) 
-
-Those interested in accessing the dataset should complete the following [application](https://cv19memorial.typeform.com/to/m3p8Qn). Email <a href="mailto:info@cv19memorial.org">info@cv19memorial.org</a> with any questions. 
+ 
 
 ### Archive Access Application
 
@@ -69,7 +68,7 @@ Applications must:
 Data access is granted for a period of six months from when the data is provided. If access to the data is needed for more than six months, a written request for access to the data for another six months is required and must be made prior to the original data access expiration date. Further extensions can be negotiated as needed.
 
 #### Review of Proposals
-Please allow up to two weeks for the cv19memorial team to review your application. Proposals are reviewed in the order they are received. Direct any questions about the application to info@cv19memorial.org.
+Please allow up to two weeks for the cv19memorial team to review your application. Proposals are reviewed in the order they are received. Direct any questions about the application to <a href="mailto:info@cv19memorial.org">info@cv19memorial.org</a>.
 
 ### Conditions
 #### Fees
@@ -81,6 +80,7 @@ Approval of a research project by cv19memorial via this form and provision of da
 #### Dissemination
 The applicant(s) must submit an electronic copy to cv19memorial of any and all reports, presentations, and publications based on the data prior to the time of publication/presentation. cv19memorial reserves the right to disseminate your findings on its website in a form compatible with any copyright agreement, if any. Under no circumstances may researchers share the data with anyone who has not been approved for access by cv19memorial.
 
+Those interested in accessing the dataset should complete the [application](https://cv19memorial.typeform.com/to/m3p8Qn). Email <a href="mailto:info@cv19memorial.org">info@cv19memorial.org</a> with any questions.
 
 ## <a name="FAQ"></a>FAQ
 ### Not In Your Language?
