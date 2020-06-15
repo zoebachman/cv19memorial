@@ -15,7 +15,9 @@ var objects = [];
 var animationDirections = [];
 var animateBbls = true;
 
-var directionScreen = document.getElementById("directions");
+var mainOverlay = document.getElementById("intro");
+var logoDiv = document.getElementById("logo").children[0];
+var instructions = document.getElementById("directions");
 var toolTipTextContainer = document.getElementById("cursorTextContainer");
 var mainScene = document.getElementById("main-container");
 var fadeToDiv = document.getElementById("fadeScreen");
@@ -26,6 +28,7 @@ var memorialOverlay = document.getElementById("overlay");
 var hasVisitedMemorial = false;
 
 initiate();
+calculateWidths(window.innerWidth);
 
 window.onload = function() {
   returnBtn.addEventListener("click", function (event) {
@@ -34,27 +37,44 @@ window.onload = function() {
     animateBbls = !animateBbls;
   });
 
-  directionScreen.children[1].addEventListener("click", function (event) {
-    directionAppearance('hidden', '0', 'opacity 1s ease-in-out, visibility 0s linear 1s');
-  });
-
   window.addEventListener( 'resize', onWindowResize, false );
 
-  calculateOverlay(window.innerWidth);
+  animateLogo();
 }
 
 function onWindowResize() {
   location.reload();
 }
 
-function calculateOverlay(winWidth) {
+function calculateWidths(winWidth) {
   if (winWidth <= 600) {
-    overlay.style.width = "80%"
+    overlay.style.width = "80%";
+    logoDiv.parentElement.style.width = "50%";
   } else if (winWidth > 600 && winWidth < 1200) {
     overlay.style.width = (80 - ((winWidth - 600) * 0.042)) + "%";
+    logoDiv.parentElement.style.width = (50 - ((winWidth - 600) * 0.05)) + "%";
   } else if (winWidth >= 1200) {
     overlay.style.width = "45%";
+    logoDiv.parentElement.style.width = "20%";
   }
+}
+
+var lastImgX = 0;
+
+function animateLogo() {
+  var animationInterval = setInterval(function(){
+    var percentage = (lastImgX / (46865 - 455)) * 100;
+    logoDiv.style.backgroundPosition = percentage + '% 0%';
+    lastImgX = lastImgX + 455;
+    if (lastImgX > 46865) {
+      clearInterval(animationInterval);
+      instructions.style.opacity = '1';
+      instructions.children[1].addEventListener("click", function (event) {
+        directionAppearance('hidden', '0', 'opacity 1s ease-in-out, visibility 0s linear 1s');
+      });
+    }
+  }, 50);
+  animationInterval;
 }
 
 function initiate() {
@@ -330,10 +350,10 @@ function fadeTo(scene) {
       directionAppearance('hidden', '0', null);
     } else {
       if (hasVisitedMemorial == false) {
-        directionScreen.children[0].children[0].innerHTML = "rotate clockwise to reveal the testimony";
-        directionScreen.style.background = 'rgba(0, 0, 0, 0.95)';
-        directionScreen.style.color = '#f4eae0';
-        directionScreen.children[1].style.color = '#f4eae0';
+        instructions.children[0].children[0].innerHTML = "rotate clockwise to reveal the testimony";
+        mainOverlay.style.background = 'rgba(0, 0, 0, 0.95)';
+        instructions.style.color = '#f4eae0';
+        instructions.children[1].style.color = '#f4eae0';
         directionAppearance('visible', '1', null);
         hasVisitedMemorial = true;
       }
@@ -348,10 +368,10 @@ function fadeTo(scene) {
 
 function directionAppearance(visibility, opacity, transition) {
   if (transition) {
-    directionScreen.style.transition = transition;
+    mainOverlay.style.transition = transition;
   } else {
-    directionScreen.style.removeProperty('transition');
+    mainOverlay.style.removeProperty('transition');
   }
-  directionScreen.style.opacity = opacity;
-  directionScreen.style.visibility = visibility;
+  mainOverlay.style.opacity = opacity;
+  mainOverlay.style.visibility = visibility;
 }
