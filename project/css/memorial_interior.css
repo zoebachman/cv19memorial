@@ -18,11 +18,11 @@
   color: #f4eae0;
   font-style: italic;
 }
-#testimony__info{
+#testimony-info{
   opacity: 1;
   transition: opacity 0.5s ease-in-out;
 }
-.personal__info {
+.personal-info {
   position: absolute;
   top: 0%;
   left: 0%;
@@ -33,12 +33,12 @@
   justify-content: center;
   align-items: center;
 }
-.personal__info * {
+.personal-info * {
   text-align: center;
   font-weight: 600;
   margin: 0.5em 1.25em;
 }
-.testimony__type {
+.testimony-type {
   position: absolute;
   left: 0%;
   bottom: 0%;
@@ -47,7 +47,7 @@
   margin-bottom: 1em;
   font-weight: 500;
 }
-#testimony_media {
+#testimony-media {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -60,13 +60,13 @@
   opacity: 0;
   transition: opacity 0.5s ease-in-out;
 }
-#testimony_media video {
+#testimony-media video {
   position: absolute;
   left: 50%;
   transform: translate(-50%, 0%);
   height: 100%;
 }
-#testimony_media div {
+#testimony-media div {
   position: absolute;
   left: 50%;
   transform: translate(-50%, 0%);
