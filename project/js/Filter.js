@@ -1,21 +1,21 @@
-function Filter(testimonies) {
-
-  var content = testimonies;
-
-  var filterModal = document.getElementById("filter-modal");
+function Filter(content, container, button) {
 
   var modalState = "out";
+
+  var btnVis = "in";
+
+  var buttons = [];
 
   var activeParams = {
     locations: [],
     types: []
   };
 
-  var testimonyTypes = [];
-
-  var locations = [];
-
   this.createContent = function () {
+
+    var locations = [];
+
+    var testimonyTypes = [];
 
     for (var i = 0; i < content.length; i ++) {
 
@@ -30,9 +30,30 @@ function Filter(testimonies) {
       }
     }
 
-    createButtons(testimonyTypes, activeParams.types);
+    container.appendChild(createButtons(locations, activeParams.locations));
 
-    createButtons(locations, activeParams.locations);
+    container.appendChild(createButtons(testimonyTypes, activeParams.types));
+
+    button.className = 'inactive-button';
+
+    button.onclick = function() { toggleElements(container, button) };
+
+    container.addEventListener("click", function (event) {
+
+      if (event.target == this) {
+
+        toggleElements(container, button);
+      }
+    });
+
+    return buttons;
+  }
+
+  function toggleElements(container, button) {
+
+    toggleModal(container);
+
+    toggleButton(button);
   }
 
   function createButtons(parameters, paramArray) {
@@ -43,77 +64,50 @@ function Filter(testimonies) {
 
       var parameter = new Parameter(parameters[i], paramContainer, paramArray);
 
-      bindParamClick(parameter.getButton());
+      parameter.changeState();
+
+      buttons.push(parameter);
     }
 
-    filterModal.appendChild(paramContainer);
+    return paramContainer;
   }
 
-  function bindParamClick(button) {
+  function toggleButton(button) {
 
-    button.elem.onclick = function() { onParameterClick (button)};
+    var newState = modalState == "in" ? 'active-button' : 'inactive-button';
 
-    changeState(button);
+    var oldState = newState == 'inactive-button' ? 'active-button' : 'inactive-button';
+
+    button.removeClass = oldState;
+
+    button.className = newState;
   }
 
-  function onParameterClick(button) {
+  function toggleModal(modal) {
 
-    changeState(button);
+    var visDirection = modalState == "in" ? "out" : "in";
+
+    fade(modal, visDirection);
+
+    modalState = visDirection;
   }
 
-  function changeState(btn) {
+  this.toggleBtnVis = function () {
 
-    var newState = btn.state != "active" ? "active" : "inactive";
+    var visDirection = btnVis == "in" ? "out" : "in";
 
-    var oldState = newState != "inactive" ? "inactive" : "active";
+    fade(button, visDirection);
 
-    if (newState == "inactive" && btn.array.length > 1) {
-
-      btn.state = newState;
-
-      btn.elem.className = newState;
-
-      btn.elem.classList.remove = oldState;
-
-      btn.array.splice(btn.array.lastIndexOf(btn.label), 1);
-
-    } else if (newState == "active" && !btn.array.find(paramVal => paramVal == btn.label)){
-
-      btn.state = newState;
-
-      btn.elem.className = newState;
-
-      btn.elem.classList.remove = oldState;
-
-      btn.array.push(btn.label);
-    }
+    btnVis = visDirection;
   }
 
-  this.toggleModal = function () {
+  function fade(elem, direction) {
 
-    var fadeDirection = modalState == "in" ? "out" : "in";
+    elem.style.transition = direction == "in" ? 'visibility 0s linear, opacity 0.75s ease-in-out' : 'opacity 0.75s ease-in-out, visibility 0s linear 1s';
 
-    fadeModal(fadeDirection)
+    elem.style.opacity = direction == "in" ? '1' : '0';
 
-    modalState = fadeDirection;
-
-    if (fadeDirection == "out") {
-
-      return activeParams;
-
-    } else {
-
-      return null;
-    }
-  }
-
-  function fadeModal(direction) {
-
-    filterModal.style.transition = direction == "in" ? 'visibility 0s linear, opacity 0.75s ease-in-out' : 'opacity 0.75s ease-in-out, visibility 0s linear 1s';
-
-    filterModal.style.opacity = direction == "in" ? '1' : '0';
-
-    filterModal.style.visibility = direction == "in" ? 'visible' : 'hidden';
+    elem.style.visibility = direction == "in" ? 'visible' : 'hidden';
   }
 
   this.getActiveParams = function () {

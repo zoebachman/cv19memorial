@@ -43,7 +43,19 @@ hr {
   flex-direction: row;
   justify-content: space-around;
 }
-.filter-menu div:hover {
+.filter-menu #search-btn:hover {
+  font-weight: 600;
+}
+.active-button {
+  font-weight: 600;
+}
+.active-button:hover{
+  font-weight: 500;
+}
+.inactive-button {
+  font-weight: 500;
+}
+.inactive-button:hover {
   font-weight: 600;
 }
 .site-menu {

@@ -26,26 +26,18 @@ function MainSceneManager(container) {
 
   this.filterBubbles = function (parameters) {
 
-    if (parameters) {
+    animateBbls = !animateBbls;
 
-      animateBbls = !animateBbls;
+    for (var i = 0; i < bubbles.length; i ++) {
 
-      for (var i = 0; i < bubbles.length; i ++) {
+      var bubble = bubbles[i].getTestimony();
 
-        var bubble = bubbles[i].getTestimony();
+      var bubbleState = !parameters.locations.find(location => location == bubble.content.location.country) || !parameters.types.find(type => type == bubble.content.type) ? "out" : "in";
 
-        if (parameters.locations.find(location => location == bubble.content.location.country) && parameters.types.find(type => type == bubble.content.type)) {
-
-          fade(bubble.bubbleObject.element, "in");
-
-        } else {
-
-          fade(bubble.bubbleObject.element, "out");
-        }
-      }
-
-      animateBbls = !animateBbls;
+      fade(bubble.bubbleObject.element, bubbleState);
     }
+
+    animateBbls = !animateBbls;
   }
 
   this.beginTestimonyTransition = function(testimony) {

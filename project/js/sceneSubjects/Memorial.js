@@ -14,9 +14,24 @@ function Memorial(content) {
     text: []
   };
 
-  createMediaElem();
-  createTestimonyText(content.text.split(' '));
-  calcAngleIncrements();
+  createMemorialContent();
+
+  function createMemorialContent() {
+
+    if (content.img_src || content.media_src) {
+
+      createMediaElem();
+    }
+
+    if (content.text) {
+
+      createTestimonyText(content.text.split(' '));
+    }
+
+    calcAngleIncrements();
+
+    console.log(memorialContent);
+  }
 
   function createInfoElems (elemArray) {
 
@@ -78,10 +93,6 @@ function Memorial(content) {
       testimonyElements.push(mediaContainer);
 
       memorialContent.media.push(portraitElem);
-
-    } else {
-
-      return null;
     }
   }
 

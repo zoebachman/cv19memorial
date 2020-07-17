@@ -1,10 +1,13 @@
 var mainSceneContainer = document.getElementById("main-scene");
+
 var memorialSceneContainer = document.getElementById("memorial-scene");
-var mainSceneManager, memorialSceneManage;
+
+var mainSceneManager, memorialSceneManage, filter;
 
 init();
 
 function init () {
+
   window.onload = function() {
 
     loadScript('/js/MainSceneManager.js', createMainScene);
@@ -25,7 +28,7 @@ function loadScript(uri, callBack) {
 
   script.src = uri;
 
-  script.onload = function(stuff) {
+  script.onload = function() {
 
     callBack();
   };
@@ -195,25 +198,6 @@ function createBubbles(testimonyContent) {
   update();
 }
 
-function createFilter(content) {
-
-  var filter = new Filter(content);
-
-  loadScript('/js/sceneSubjects/Parameter.js', filter.createContent);
-
-  bindFilterBtn(filter);
-}
-
-function bindFilterBtn(fltr) {
-
-  var filterBtn = document.getElementById("filter-btn");
-
-  filterBtn.onclick = function() {
-
-    mainSceneManager.filterBubbles(fltr.toggleModal());
-  };
-}
-
 function bindTestimonyClick(bubble) {
 
   bubble.bubbleObject.element.onclick = function() { onTestimonyClick (bubble)};
@@ -225,6 +209,8 @@ function onTestimonyClick(testimony) {
 
   mainSceneManager.beginTestimonyTransition(testimony.bubbleObject);
 
+  filter.toggleBtnVis();
+
   if (testimony.memorialContent) {
 
     memorialSceneManager.setMemorialContent(testimony.memorialContent.getMemorialContent());
@@ -235,6 +221,44 @@ function onTestimonyClick(testimony) {
 
     memorialSceneManager.setMemorialContent(testimony.memorialContent.getMemorialContent());
   }
+}
+
+function createFilter(content) {
+
+  var filterModal = document.getElementById("filter-modal");
+
+  var filterBtn = document.getElementById("filter-btn");
+
+  filter = new Filter(content, filterModal, filterBtn);
+
+  loadScript('/js/sceneSubjects/Parameter.js', function() {
+
+    sortButtons(filter.createContent());
+  });
+}
+
+function sortButtons(buttons) {
+
+  for (var i = 0; i < buttons.length; i ++) {
+
+    bindParamClick(buttons[i]);
+  }
+}
+
+function bindParamClick(button) {
+
+  var btn = button.getButton();
+
+  btn.elem.onclick = function() { onParameterClick (button)};
+}
+
+function onParameterClick(button) {
+
+  var btn = button.getButton();
+
+  button.changeState();
+
+  mainSceneManager.filterBubbles(filter.getActiveParams());
 }
 
 function bindCloseBtns() {
@@ -262,6 +286,8 @@ function bindReturnBtn() {
   var returnBtn = document.getElementById("return_btn");
 
   returnBtn.addEventListener("click", function (event) {
+
+    filter.toggleBtnVis();
 
     mainSceneManager.resetCamera();
 

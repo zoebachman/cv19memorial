@@ -31,6 +31,13 @@ function MemorialSceneManager (container) {
 
   this.resetControls = function () {
 
+    if (elements[1] && elements[1].children[0].tagName == "VIDEO" && !elements[1].children[0].paused) {
+
+      elements[1].children[0].pause();
+
+      elements[1].children[1].style.visibility = 'visible';
+    }
+
     elements = null;
 
     degrees = null;
@@ -60,6 +67,8 @@ function MemorialSceneManager (container) {
     var angle = memorialScene.getAngle();
 
     if (angle != lastDegree) {
+
+      console.log(angle);
 
       updateMemorialDisplay( angle );
 
