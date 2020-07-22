@@ -1,8 +1,4 @@
-var mainSceneContainer = document.getElementById("main-scene");
-
-var memorialSceneContainer = document.getElementById("memorial-scene");
-
-var mainSceneManager, memorialSceneManage, filter;
+var sceneManager;
 
 init();
 
@@ -10,7 +6,23 @@ function init () {
 
   window.onload = function() {
 
-    loadScript('/js/MainSceneManager.js', createMainScene);
+    loadScript('/js/SceneManager.js', function() {
+
+      sceneManager = new SceneManager();
+
+      loadScript('/js/MainSceneManager.js', function() {
+
+        loadScript('/js/MemorialSceneManager.js', function() {
+
+          loadScript('/js/Environment.js', function() {
+
+            sceneManager.createScenes();
+
+            loadScript('/js/sceneSubjects/Bubble.js', sceneManager.createSceneSubjects);
+          });
+        });
+      });
+    });
 
     bindCloseBtns();
 
@@ -34,231 +46,6 @@ function loadScript(uri, callBack) {
   };
 
   document.getElementsByTagName('body')[0].appendChild(script);
-}
-
-function createMainScene() {
-
-  mainSceneManager = new MainSceneManager(mainSceneContainer);
-
-  loadScript('/js/MemorialSceneManager.js', createMemorialScene);
-}
-
-function createMemorialScene() {
-
-  memorialSceneManager = new MemorialSceneManager(memorialSceneContainer);
-
-  loadScript('/js/Environment.js', createScenes);
-}
-
-function createScenes() {
-
-  mainSceneManager.createEnvironment();
-
-  memorialSceneManager.createEnvironment();
-
-  loadScript('/js/sceneSubjects/Bubble.js', createSceneSubjects);
-}
-
-function createSceneSubjects() {
-
-   $.ajax({
-
-     url: '/data/cv19memorial_responses.csv',
-
-     dataType: 'text',
-
-   }).done(createTestimonies);
-}
-
-function createTestimonies(data) {
-
-  var testimonyContent = [];
-
-  var allRows = data.split(/\r?\n|\r/);
-
-  for (var i = 0; i < allRows.length; i ++) {
-
-    var testimony_data = allRows[i].match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g);
-
-    if (testimony_data) {
-
-      var testimonyInfo = {
-        personal_info: null,
-        location: {
-          region: null,
-          country: null
-        },
-        type: null,
-        img_src: null,
-        media_src: null,
-        text: null
-      };
-
-      if (testimony_data[1] == "Losing a loved one" && testimony_data[5] != "null") {
-
-        testimonyInfo.personal_info = formatPersonalInfo(testimony_data[5], testimony_data[6], testimony_data[8], testimony_data[7]);
-
-      } else {
-
-        testimonyInfo.personal_info = formatPersonalInfo(testimony_data[2], testimony_data[3], testimony_data[4], "null");
-      }
-
-      if (testimony_data[11] != "null") {
-
-        testimonyInfo.location.country = testimony_data[11];
-
-        if (testimony_data[12] != "null") {
-
-          testimonyInfo.location.region = testimony_data[12].replace(/['"]+/g, '') + ", ";
-        }
-      }
-
-      testimonyInfo.type = testimony_data[1];
-
-      if (testimony_data[10] != "null") {
-
-        var media_ref = testimony_data[10].substring(testimony_data[10].lastIndexOf("/") + 1, testimony_data[10].length);
-
-        var media_type = media_ref.substring(media_ref.lastIndexOf(".") + 1, media_ref.length);
-
-        if(media_type == "mp4") {
-
-          testimonyInfo.media_src = media_ref;
-
-        } else {
-
-          testimonyInfo.img_src = media_ref;
-        }
-      }
-
-      if (testimony_data[9] != "null") {
-
-        testimonyInfo.text = testimony_data[9].replace(/['"]+/g, '');
-      }
-
-      testimonyContent.push(testimonyInfo);
-    }
-  }
-
-  createBubbles(testimonyContent);
-
-  createFilter(testimonyContent);
-}
-
-function formatPersonalInfo(firstName, lastName, age, dod) {
-
-  var personalInfo = {
-    name: undefined,
-    age: undefined,
-    dod: undefined
-  };
-
-  if (firstName != "null" && lastName != "null") {
-
-    personalInfo.name = firstName + " " + lastName;
-
-  } else if (firstName != "null") {
-
-    personalInfo.name = firstName;
-
-  } else if (lastName != "null") {
-
-    personalInfo.name = lastName;
-  }
-
-  if (age != "null" && dod != "null") {
-
-    personalInfo.age = "Age: " + age + ", ";
-
-    personalInfo.dod = "Date of Passing: " + dod;
-
-  } else if (age != "null") {
-
-    personalInfo.age = "Age: " + age;
-
-  } else if (dod != "null") {
-
-    personalInfo.dod = "Date of Passing: " + dod;
-  }
-
-  return personalInfo;
-}
-
-function createBubbles(testimonyContent) {
-
-  for (var i = 0; i < testimonyContent.length ; i++) {
-
-    var bubble = new Bubble(testimonyContent[i]);
-
-    mainSceneManager.addSceneSubject(bubble);
-
-    bindTestimonyClick(bubble.getTestimony());
-  }
-
-  update();
-}
-
-function bindTestimonyClick(bubble) {
-
-  bubble.bubbleObject.element.onclick = function() { onTestimonyClick (bubble)};
-
-  bubble.bubbleObject.element.ontouchstart = function() { onTestimonyClick (bubble)};
-}
-
-function onTestimonyClick(testimony) {
-
-  mainSceneManager.beginTestimonyTransition(testimony.bubbleObject);
-
-  filter.toggleBtnVis();
-
-  if (testimony.memorialContent) {
-
-    memorialSceneManager.setMemorialContent(testimony.memorialContent.getMemorialContent());
-
-  } else {
-
-    testimony.memorialContent = new Memorial(testimony.content);
-
-    memorialSceneManager.setMemorialContent(testimony.memorialContent.getMemorialContent());
-  }
-}
-
-function createFilter(content) {
-
-  var filterModal = document.getElementById("filter-modal");
-
-  var filterBtn = document.getElementById("filter-btn");
-
-  filter = new Filter(content, filterModal, filterBtn);
-
-  loadScript('/js/sceneSubjects/Parameter.js', function() {
-
-    sortButtons(filter.createContent());
-  });
-}
-
-function sortButtons(buttons) {
-
-  for (var i = 0; i < buttons.length; i ++) {
-
-    bindParamClick(buttons[i]);
-  }
-}
-
-function bindParamClick(button) {
-
-  var btn = button.getButton();
-
-  btn.elem.onclick = function() { onParameterClick (button)};
-}
-
-function onParameterClick(button) {
-
-  var btn = button.getButton();
-
-  button.changeState();
-
-  mainSceneManager.filterBubbles(filter.getActiveParams());
 }
 
 function bindCloseBtns() {
@@ -287,11 +74,7 @@ function bindReturnBtn() {
 
   returnBtn.addEventListener("click", function (event) {
 
-    filter.toggleBtnVis();
-
-    mainSceneManager.resetCamera();
-
-    memorialSceneManager.resetControls();
+    sceneManager.resetScenes();
   });
 }
 
@@ -350,7 +133,5 @@ function update () {
 
   requestAnimationFrame(update);
 
-  mainSceneManager.update();
-
-  memorialSceneManager.update();
+  sceneManager.update();
 }

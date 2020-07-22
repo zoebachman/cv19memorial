@@ -16,8 +16,9 @@
     <div class="scene-menu nav">
       <div class="main-header">cv19memorial</div>
       <div class="filter-menu">
+        <div>wander</div>
         <div id="search-btn">search</div>
-        <div id="filter-btn">categories</div>
+        <div id="filter-btn">filter</div>
       </div>
       <div class="site-menu">
         <div class="menu-btn">menu</div>
@@ -107,7 +108,11 @@
         </div>
         <div class="btn">continue</div>
       </div>
-      <div id="filter-modal"></div>
+      <div id="filter-modal" class="modal"></div>
+      <div id="search-modal" class="modal">
+        <input type="text" id="searchField">
+        <div id="searchBtn" class="nav btn">Search</div>
+      </div>
       <p id="cursorTipText"></p>
     </div>
     <div id="memorial-scene">
@@ -130,8 +135,11 @@
       </div>
     </div>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
-  	<script src="/js/main.js"></script>
-    <script src="/js/Filter.js"></script>
     <script src="/js/sceneSubjects/Memorial.js"></script>
+    <script src="/js/sceneSubjects/Parameter.js"></script>
+    <script src="/js/Filter.js"></script>
+    <script src="/js/Search.js"></script>
+    <script src="/js/ModalManager.js"></script>
+    <script src="/js/main.js"></script>
   </body>
 </html>

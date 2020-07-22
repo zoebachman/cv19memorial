@@ -1,10 +1,32 @@
-function MainSceneManager(container) {
+function MainSceneManager(mainContainer, memorialContainer) {
 
   var curtain = document.getElementById("curtain");
 
   var bubbleScript = document.getElementById("bubble-script");
 
-  var mainScene, lastCamPos, sceneToHide, sceneToShow;
+  var visibleScene = mainContainer;
+
+  var hiddenScene = memorialContainer;
+
+  var mainScene, lastCamPos, modalManager;
+
+  var filterModal = {
+    elem: document.getElementById("filter-modal"),
+    state: "out",
+    button: {
+      elem: document.getElementById("filter-btn"),
+      state: "in"
+    }
+  }
+
+  var searchModal = {
+    elem: document.getElementById("search-modal"),
+    state: "out",
+    button: {
+      elem: document.getElementById("search-btn"),
+      state: "in"
+    }
+  }
 
   var bubbles = [];
 
@@ -12,7 +34,106 @@ function MainSceneManager(container) {
 
   this.createEnvironment = function () {
 
-    mainScene = new Environment(container, "css");
+    mainScene = new Environment(mainContainer, "css");
+
+    modalManager = new ModalManager(filterModal, searchModal);
+
+    bindModal(filterModal, searchModal);
+
+    bindModal(searchModal, filterModal);
+
+    bindSearchBtn();
+  }
+
+  function bindModal(modalToShow, modalToHide) {
+
+    modalToShow.button.elem.className = 'inactive-button';
+
+    modalToShow.button.elem.onclick = function() {
+
+      toggleElems(modalToShow, modalToHide);
+
+      if (modalToShow == filterModal) {
+
+        filterBubbles(modalManager.getFilterParams());
+      }
+    };
+
+    modalToShow.elem.addEventListener("click", function (event) {
+
+      if (event.target == this) {
+
+        toggleElems(modalToShow, modalToHide);
+      }
+    });
+  }
+
+  function toggleElems (modalToShow, modalToHide = null) {
+
+    modalManager.toggleModal(modalToShow);
+
+    modalManager.toggleButton(modalToShow);
+
+    if (modalToHide && modalToHide.state == "in") {
+
+      modalManager.toggleModal(modalToHide);
+
+      modalManager.toggleButton(modalToHide);
+    }
+  }
+
+  function bindSearchBtn() {
+
+    document.getElementById("searchBtn").onclick = function() {
+
+      toggleElems(searchModal);
+
+      searchBubbles(modalManager.getSearchVal())
+    };
+  }
+
+  function searchBubbles(name) {
+
+    var searchVal = getWordArray(name);
+
+    animateBbls = !animateBbls;
+
+    for (var i = 0; i < bubbles.length; i ++) {
+
+      var bubble = bubbles[i].getTestimony();
+
+      var testimonyName = getWordArray(bubble.content.personal_info.name);
+
+      var bubbleState;
+
+      for (var j = 0; j < searchVal.length; j ++) {
+
+        bubbleState = !testimonyName.find(word => word == searchVal[j]) ? "out" : "in";
+
+        var isFound = bubbleState == "out" ? "not found" : "found";
+
+        console.log(searchVal[j] + " " + isFound + " in " + bubble.content.personal_info.name);
+      }
+
+      console.log(bubble.content.personal_info.name + " is " + bubbleState);
+
+      console.log("--------------------------------------");
+
+      fade(bubble.bubbleObject.element, bubbleState);
+    }
+
+    animateBbls = !animateBbls;
+  }
+
+  function getWordArray (word) {
+
+    var lowerCase = word.toLowerCase();
+
+    var sansAccents = lowerCase.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+    var arr = sansAccents.split(' ');
+
+    return arr;
   }
 
   this.addSceneSubject = function (subject) {
@@ -21,10 +142,33 @@ function MainSceneManager(container) {
 
     mainScene.addObject(bubble.bubbleObject);
 
+    var bubbleParams = modalManager.createFltrBtn(bubble.content);
+
+    for (var i = 0; i < bubbleParams.length; i ++) {
+
+        bindParamClick(bubbleParams[i]);
+    }
+
     bubbles.push(subject);
   }
 
-  this.filterBubbles = function (parameters) {
+  function bindParamClick(button) {
+
+    var btn = button.getButton();
+
+    btn.elem.onclick = function() { onParameterClick (button)};
+  }
+
+  function onParameterClick(button) {
+
+    var btn = button.getButton();
+
+    button.changeState();
+
+    filterBubbles(modalManager.getFilterParams());
+  }
+
+  function filterBubbles(parameters) {
 
     animateBbls = !animateBbls;
 
@@ -48,6 +192,8 @@ function MainSceneManager(container) {
 
     var tween = new TWEEN.Tween(position).to(target, 500);
 
+    toggleModalBtns();
+
     cursorTipText.style.display = "none";
 
     animateBbls = !animateBbls;
@@ -69,19 +215,37 @@ function MainSceneManager(container) {
     tween.start();
   }
 
+  function toggleModalBtns() {
+
+    toggleBtnVis(filterModal);
+
+    toggleBtnVis(searchModal);
+  }
+
+  function toggleBtnVis(modal) {
+
+    var visDirection = modal.button.state == "in" ? "out" : "in";
+
+    fade(modal.button.elem, visDirection);
+
+    modal.button.state = visDirection;
+  }
+
   function transitionTo(scene) {
 
-    sceneToHide = sceneToHide != mainSceneContainer ? mainSceneContainer : memorialSceneContainer;
+    var newHiddenScene = visibleScene;
 
-    sceneToShow = sceneToShow != memorialSceneContainer ? memorialSceneContainer : mainSceneContainer;
+    visibleScene = hiddenScene;
+
+    hiddenScene = newHiddenScene;
 
     fade(curtain, "in");
 
     setTimeout( function() {
 
-      sceneToShow.style.left = '0em';
+      visibleScene.style.left = '0em';
 
-      sceneToHide.style.left= '-999em';
+      hiddenScene.style.left= '-999em';
 
       fade(curtain, "out");
 
@@ -139,6 +303,8 @@ function MainSceneManager(container) {
     zoomTestimony("out", lastCamPos , 1000);
 
     animateBbls = !animateBbls;
+
+    toggleModalBtns();
   }
 
   this.update = function() {

@@ -1,113 +1,55 @@
-function Filter(content, container, button) {
+function Filter(modal) {
 
-  var modalState = "out";
+  var locationContainer = createDiv();
 
-  var btnVis = "in";
+  var typeContainer = createDiv();
 
-  var buttons = [];
+  var locations = [];
+
+  var testimonyTypes = [];
 
   var activeParams = {
     locations: [],
     types: []
   };
 
-  this.createContent = function () {
+  this.createBtn = function (content) {
 
-    var locations = [];
+    var buttons = [];
 
-    var testimonyTypes = [];
+    if (!testimonyTypes.find(type => type == content.type)) {
 
-    for (var i = 0; i < content.length; i ++) {
+      buttons.push(createButton(content.type, typeContainer , activeParams.types));
 
-      if (!testimonyTypes.find(type => type == content[i].type)) {
-
-        testimonyTypes.push(content[i].type);
-      }
-
-      if (!locations.find(location => location == content[i].location.country)) {
-
-        locations.push(content[i].location.country);
-      }
+      testimonyTypes.push(content.type);
     }
 
-    container.appendChild(createButtons(locations, activeParams.locations));
+    if (!locations.find(location => location == content.location.country)) {
 
-    container.appendChild(createButtons(testimonyTypes, activeParams.types));
+      buttons.push(createButton(content.location.country, locationContainer, activeParams.locations));
 
-    button.className = 'inactive-button';
-
-    button.onclick = function() { toggleElements(container, button) };
-
-    container.addEventListener("click", function (event) {
-
-      if (event.target == this) {
-
-        toggleElements(container, button);
-      }
-    });
+      locations.push(content.location.country);
+    }
 
     return buttons;
   }
 
-  function toggleElements(container, button) {
-
-    toggleModal(container);
-
-    toggleButton(button);
-  }
-
-  function createButtons(parameters, paramArray) {
+  function createDiv() {
 
     var paramContainer = document.createElement('div');
 
-    for (var i = 0; i < parameters.length; i ++) {
-
-      var parameter = new Parameter(parameters[i], paramContainer, paramArray);
-
-      parameter.changeState();
-
-      buttons.push(parameter);
-    }
+    modal.appendChild(paramContainer);
 
     return paramContainer;
   }
 
-  function toggleButton(button) {
+  function createButton(parameter, paramContainer, paramArray) {
 
-    var newState = modalState == "in" ? 'active-button' : 'inactive-button';
+    var parameter = new Parameter(parameter, paramContainer, paramArray);
 
-    var oldState = newState == 'inactive-button' ? 'active-button' : 'inactive-button';
+    parameter.changeState();
 
-    button.removeClass = oldState;
-
-    button.className = newState;
-  }
-
-  function toggleModal(modal) {
-
-    var visDirection = modalState == "in" ? "out" : "in";
-
-    fade(modal, visDirection);
-
-    modalState = visDirection;
-  }
-
-  this.toggleBtnVis = function () {
-
-    var visDirection = btnVis == "in" ? "out" : "in";
-
-    fade(button, visDirection);
-
-    btnVis = visDirection;
-  }
-
-  function fade(elem, direction) {
-
-    elem.style.transition = direction == "in" ? 'visibility 0s linear, opacity 0.75s ease-in-out' : 'opacity 0.75s ease-in-out, visibility 0s linear 1s';
-
-    elem.style.opacity = direction == "in" ? '1' : '0';
-
-    elem.style.visibility = direction == "in" ? 'visible' : 'hidden';
+    return parameter;
   }
 
   this.getActiveParams = function () {
