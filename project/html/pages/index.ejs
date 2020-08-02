@@ -1,4 +1,4 @@
-<html lang="en">
+  <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
@@ -10,25 +10,70 @@
     <script src="/js/three/js/controls/OrbitControls.js"></script>
     <script src="/js/three/js/renderers/CSS3DRenderer.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/16.3.5/Tween.min.js"></script>
+    <script src="https://rawgit.com/farzher/fuzzysort/master/fuzzysort.js"></script>
     <% include ../helpers/head %>
   </head>
   <body>
+    <div id="memorial-scene">
+      <div id="overlay">
+        <div id="content-container">
+          <div id="testimony-info">
+            <div class="personal-info"></div>
+            <div class="testimony-type"></div>
+          </div>
+          <div id="testimony-media"></div>
+          <div id="testimony-wrapper"></div>
+        </div>
+      </div>
+      <div id="memorial-directions" class="instructions">
+        <div>
+          <p>rotate clockwise to reveal the testimony.</p>
+        </div>
+        <div class="btn">continue</div>
+      </div>
+      <div class="nav btn" id="return_btn">return</div>
+      <div id="memorial-world"></div>
+    </div>
+    <div id="main-scene">
+      <div id="main-world"></div>
+      <p id="cursorTipText"></p>
+      <div id="filter-modal" class="modal">
+        <div class="nav">All categories are currently selected. To refine your search, click on a category to deselect it.</div>
+      </div>
+      <div id="search-modal" class="modal">
+        <input type="text" class="nav" id="searchField">
+        <div id="searchBtn" class="nav btn">Search</div>
+      </div>
+      <div id="main-directions" class="instructions">
+        <div>
+          <p>drag with one finger to rotate, drag with two fingers to pan, and pinch to move in and out of the scene.</p>
+        </div>
+        <div class="btn">continue</div>
+      </div>
+    </div>
+    <div id="curtain"></div>
+    <div id="logo-container">
+      <div id="logo">
+        <div></div>
+      </div>
+    </div>
     <div class="scene-menu nav">
-      <div class="main-header">cv19memorial</div>
+      <div class="main-header"><a href="/">cv19memorial</a></div>
       <div class="filter-menu">
-        <div>wander</div>
-        <div id="search-btn">search</div>
-        <div id="filter-btn">filter</div>
+        <div>
+          <div id="search-btn">search</div>
+          <div id="filter-btn">categories</div>
+        </div>
       </div>
       <div class="site-menu">
-        <div class="menu-btn">menu</div>
-        <div class="menu-content">
+        <span>menu</span>
+        <span class="menu-content">
           <a href="/about">about</a>
           <a href="/healingvoices">healing voices</a>
           <a href="/media">media</a>
           <!-- <hr>
           <a href="#" style="padding-top:0px" >español</a> -->
-        </div>
+        </span>
       </div>
     </div>
     <div class="nav page-footer">
@@ -93,45 +138,6 @@
             </g>
           </svg>
         </a>
-      </div>
-    </div>
-    <div id="curtain"></div>
-    <div id="logo-container">
-      <div id="logo">
-        <div></div>
-      </div>
-    </div>
-    <div id="main-scene">
-      <div id="main-directions" class="instructions">
-        <div>
-          <p>drag with one finger to rotate, drag with two fingers to pan, and pinch to move in and out of the scene.</p>
-        </div>
-        <div class="btn">continue</div>
-      </div>
-      <div id="filter-modal" class="modal"></div>
-      <div id="search-modal" class="modal">
-        <input type="text" id="searchField">
-        <div id="searchBtn" class="nav btn">Search</div>
-      </div>
-      <p id="cursorTipText"></p>
-    </div>
-    <div id="memorial-scene">
-      <div class="nav btn" id="return_btn">return</div>
-      <div id="memorial-directions" class="instructions">
-        <div>
-          <p>rotate clockwise to reveal the testimony.</p>
-        </div>
-        <div class="btn">continue</div>
-      </div>
-      <div id="overlay">
-        <div id="content-container">
-          <div id="testimony-info">
-            <div class="personal-info"></div>
-            <div class="testimony-type"></div>
-          </div>
-          <div id="testimony-media"></div>
-          <div id="testimony-wrapper"></div>
-        </div>
       </div>
     </div>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>

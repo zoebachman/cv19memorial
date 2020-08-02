@@ -23,8 +23,7 @@ body {
 h1, h2, h3, h4, h5 {
   font-weight: 600;
   font-style: italic;
-  /* color: #426282; */
-  color: #f4eae0;
+  color: #426282;
 }
 
 a {
