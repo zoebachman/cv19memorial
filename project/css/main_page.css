@@ -41,7 +41,7 @@ a:hover {
 /* ABOUT PAGE */
 
 .nav-container {
-  position: relative; 
+  position: relative;
   /* paddingleft: 5rem; */
 }
 
@@ -142,11 +142,11 @@ svg:not(:root) {
 /* MAIN ENVIRONMENT */
 
 /* MEMORIAL INTERIOR */
-.personal__info h1, 
-.personal__info h2, 
-.personal__info h3, 
-.personal__info h4, 
-.personal__info h5 {
+.personal_info h1,
+.personal_info h2,
+.personal_info h3,
+.personal_info h4,
+.personal_info h5 {
   font-weight: 600;
   font-style: italic;
   color: white;

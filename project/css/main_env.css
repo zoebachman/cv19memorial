@@ -17,30 +17,71 @@ hr {
   border: 0.5px solid currentColor;
   margin: 1em 0;
 }
-.header-item {
+.scene-menu {
   position: fixed;
-  margin-top: var(--nav-margin);
-  z-index: 999;
-  cursor: pointer;
-}
-#mainHeader {
-  margin-left: var(--nav-margin);
   top: 0;
   left: 0;
+  width: 100%;
+  margin-top: var(--nav-margin);
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
 }
-#mainHeader:hover {
+.main-header, .filter-menu, .site-menu  {
+  width: calc(100vw / 3);
+}
+.main-header {
+  margin-left: var(--nav-margin);
+}
+.main-header a {
+  cursor: pointer;
+}
+.main-header a:hover {
   font-weight: 600;
 }
-#menu-container {
+.filter-menu {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.filter-menu div {
+  width: 85%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.filter-menu > div > div {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 1.5s ease-in-out, visibility 0s linear 1s;
+  cursor: pointer;
+}
+.active-button {
+  font-weight: 600;
+}
+.active-button:hover{
+  font-weight: 500;
+}
+.inactive-button {
+  font-weight: 500;
+}
+.inactive-button:hover {
+  font-weight: 600;
+}
+.site-menu {
   margin-right: var(--nav-margin);
-  top: 0;
-  right: 0;
   text-align: right;
 }
-#menu-container:hover {
+.site-menu * {
+  cursor: pointer;
+}
+.site-menu span:hover {
   font-weight: 600;
 }
-#menu-container:hover .menu-content {
+.site-menu span:hover + .menu-content {
+  display: block;
+}
+.menu-content:hover {
   display: block;
 }
 .menu-content {
@@ -49,6 +90,7 @@ hr {
   transition: 0.5s opacity;
   padding-bottom: 2em; /* give mouse a little wiggle room */
   padding-left: 2em; /* give mouse a little wiggle room */
+  cursor: pointer;
 }
 .menu-content a {
   color: #426282;
@@ -70,10 +112,9 @@ hr {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  z-index: 999;
   cursor: default;
 }
-.testimony {
+.testimonyBtnContainer {
   display: flex;
   flex-direction: column;
 }
@@ -81,7 +122,7 @@ hr {
   display: inline-block;
   color: #426282;
   text-align: left;
-  transition: 0.5s background-color;
+  /* transition: 0.5s background-color; */
   cursor: pointer;
 }
 .btn:hover {
@@ -105,14 +146,24 @@ hr {
 #socials:hover .hover-image {
   display: inline;
 } */
-#intro {
+#curtain {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000000;
+  visibility: hidden;
+  opacity: 0;
+}
+#logo-container {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background: radial-gradient(#e2dbfd, #c3dcfd 100%);
-  z-index: 997;
+  transition: opacity 1s ease-in-out, visibility 0s linear 1s;
 }
 #logo {
   position: absolute;
@@ -131,7 +182,7 @@ hr {
   background: url("/images/icons/logo_sprite.png") no-repeat 0% 0%;
   background-size: auto 100%;
 }
-#directions {
+.instructions {
   position: absolute;
   top: 0em;
   left: 0em;
@@ -144,33 +195,112 @@ hr {
   text-align: center;
   font-weight: 500;
   font-style: italic;
+  transition: opacity 1s ease-in-out, visibility 0s linear 1s;
+}
+.instructions * {
+  margin: 0.75em 1em;
+}
+#main-directions {
+  background: radial-gradient(#e2dbfd, #c3dcfd 100%);
   color: #426282;
-  opacity: 0;
-  transition: 0.5s opacity;
 }
-#directions * {
-  margin: 1em 1em;
+#memorial-directions {
+  background: rgba(0, 0, 0, 0.90);
+  color: #f4eae0;
 }
-#main-container {
+#memorial-directions .btn {
+  color: #f4eae0;
+}
+#main-scene {
   position: absolute;
   top: 0em;
   left: 0em;
   width: 100%;
   height: 100%;
 }
-.testimonial {
+.modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.75);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  visibility: hidden;
+  opacity: 0;
+}
+.modal > div {
+  display: flex;
+  flex-direction: column;
+  margin: 1em 0.15em;
+  text-align: center;
+}
+#filter-modal > div > div{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 0.15em 0em;
+}
+#filter-modal > div > div > div {
+  border: 1px solid #426282;
+  padding: 0.45em 0.6em;
+  margin: 0em 0.15em;
+  font-style: italic;
+  border-radius: .1em;
+  cursor: pointer;
+}
+#searchField {
+  width: 25em;
+  padding: 0.25em 2.25em;
+  margin: 1.5em 0;
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 1px solid #426282;
+  background-color: transparent;
+  background-image: url('/images/icons/search_icon.png');
+  background-position: 0em 0em;
+  background-repeat: no-repeat;
+  font-weight: 500;
+  font-style: italic;
+  color: #426282;
+  font-family: freight-sans-pro, Arial, sans-serif;
+}
+#searchField:focus {
+  outline: none;
+}
+.active {
+  background-color: #426282;
+  color: #fff;
+}
+.active:hover {
+  background-color: transparent;
+  color: #426282;
+}
+.inactive {
+  background-color: transparent;
+  color: #426282;
+}
+.inactive:hover {
+  background-color: #426282;
+  color: #fff;
+}
+.testimony {
   behavior: url(PIE.htc); /* remove if you don't care about IE8 */
   width: 300px;
   height: 300px;
   overflow: hidden;
 }
-.testimonialContainer {
+.testimonyContainer {
   border-radius: 50%;
   box-shadow: 0px 0px 100px rgba(255,255,255,0.95);
   border: 1px solid rgba(255,255,255,0.25);
   /* box-shadow : inset 0 15px 25px rgba(#fff, .2),inset 0 20px 15px rgba(#ddd, .3); */
 }
-.testimonialImage {
+.testimonyImage {
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -181,31 +311,19 @@ hr {
   filter: blur(40px);
   cursor: pointer;
 }
-#cursorTextContainer {
+#cursorTipText {
   position: absolute;
   display: none;
   font-style: italic;
   font-weight: 500;
   font-size: 14px;
-  z-index: 1;
   color: #ffffff;
   text-shadow: 0px 0px 8px #000000;
-}
-#fadeScreen {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 998;
-  background-color: rgba(0, 0, 0, 0);
-  visibility: hidden;
-  transition: background-color 1.5s ease-in-out;
 }
 #memorial-scene {
   position: absolute;
   top: 0em;
-  left:-999em;
+  left: -999em;
   width: 100%;
   height: 100%;
   overflow: hidden;
@@ -214,10 +332,9 @@ hr {
   position: fixed;
   margin-top: calc(var(--nav-margin) + 2em);
   margin-left: var(--nav-margin);
-  visibility: hidden;
 }
 @media not all and (pointer: coarse) {
-  .testimonialImage:hover {
+  .testimonyImage:hover {
     -webkit-filter: blur(10px);
     -moz-filter: blur(10px);
     -o-filter: blur(10px);
