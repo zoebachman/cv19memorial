@@ -28,6 +28,8 @@ function init () {
 
     bindReturnBtn();
 
+    calcElemWidth(document.getElementById("overlay"), 45, 80, 0.042);
+
     animateLogo();
   }
 
@@ -52,11 +54,23 @@ function bindCloseBtns() {
 
   var directions = document.getElementsByClassName("instructions");
 
-  for( var i = 0;  i < directions.length; i ++) {
+  for (var i = 0;  i < directions.length; i ++) {
 
-    directions[i].children[1].onclick = function() {
+    if (directions[i].id == "main-directions") {
 
-      fadeOut(this.parentElement);
+      directions[i].children[1].onclick = function() {
+
+        sceneManager.toggleFilterBtns();
+
+        fadeOut(this.parentElement);
+      }
+
+    } else {
+
+      directions[i].children[1].onclick = function() {
+
+        fadeOut(this.parentElement);
+      }
     }
   }
 }

@@ -1,12 +1,12 @@
-function MainSceneManager(mainContainer, memorialContainer) {
+function MainSceneManager(mainContainer) {
 
   var curtain = document.getElementById("curtain");
 
   var bubbleScript = document.getElementById("bubble-script");
 
-  var visibleScene = mainContainer;
+  var visibleScene = document.getElementById("main-scene");
 
-  var hiddenScene = memorialContainer;
+  var hiddenScene =  document.getElementById("memorial-scene");
 
   var mainScene, lastCamPos, modalManager;
 
@@ -15,7 +15,7 @@ function MainSceneManager(mainContainer, memorialContainer) {
     state: "out",
     button: {
       elem: document.getElementById("filter-btn"),
-      state: "in"
+      state: "out"
     }
   }
 
@@ -24,7 +24,7 @@ function MainSceneManager(mainContainer, memorialContainer) {
     state: "out",
     button: {
       elem: document.getElementById("search-btn"),
-      state: "in"
+      state: "out"
     }
   }
 
@@ -94,35 +94,27 @@ function MainSceneManager(mainContainer, memorialContainer) {
 
   function searchBubbles(name) {
 
-    var searchVal = getWordArray(name);
+    if (name != "") {
 
-    animateBbls = !animateBbls;
+      var searchVal = getWordArray(name);
 
-    for (var i = 0; i < bubbles.length; i ++) {
+      animateBbls = !animateBbls;
 
-      var bubble = bubbles[i].getTestimony();
+      for (var i = 0; i < bubbles.length; i ++) {
 
-      var testimonyName = getWordArray(bubble.content.personal_info.name);
+        var bubble = bubbles[i].getTestimony();
 
-      var bubbleState;
+        var testimonyName = getWordArray(bubble.content.personal_info.name);
 
-      for (var j = 0; j < searchVal.length; j ++) {
+        var searchResult = fuzzysort.single(searchVal, testimonyName);
 
-        bubbleState = !testimonyName.find(word => word == searchVal[j]) ? "out" : "in";
+        var bubbleState = searchResult && searchResult.score > -1000 ? "in" : "out";
 
-        var isFound = bubbleState == "out" ? "not found" : "found";
-
-        console.log(searchVal[j] + " " + isFound + " in " + bubble.content.personal_info.name);
+        fade(bubble.bubbleObject.element, bubbleState);
       }
 
-      console.log(bubble.content.personal_info.name + " is " + bubbleState);
-
-      console.log("--------------------------------------");
-
-      fade(bubble.bubbleObject.element, bubbleState);
+      animateBbls = !animateBbls;
     }
-
-    animateBbls = !animateBbls;
   }
 
   function getWordArray (word) {
@@ -131,9 +123,7 @@ function MainSceneManager(mainContainer, memorialContainer) {
 
     var sansAccents = lowerCase.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
-    var arr = sansAccents.split(' ');
-
-    return arr;
+    return sansAccents;
   }
 
   this.addSceneSubject = function (subject) {
@@ -184,6 +174,13 @@ function MainSceneManager(mainContainer, memorialContainer) {
     animateBbls = !animateBbls;
   }
 
+  this.toggleModalBtns = function() {
+
+    toggleBtnVis(filterModal);
+
+    toggleBtnVis(searchModal);
+  }
+
   this.beginTestimonyTransition = function(testimony) {
 
     var position = mainScene.getControlsTarget();
@@ -192,7 +189,7 @@ function MainSceneManager(mainContainer, memorialContainer) {
 
     var tween = new TWEEN.Tween(position).to(target, 500);
 
-    toggleModalBtns();
+    this.toggleModalBtns();
 
     cursorTipText.style.display = "none";
 
@@ -213,13 +210,6 @@ function MainSceneManager(mainContainer, memorialContainer) {
     });
 
     tween.start();
-  }
-
-  function toggleModalBtns() {
-
-    toggleBtnVis(filterModal);
-
-    toggleBtnVis(searchModal);
   }
 
   function toggleBtnVis(modal) {
@@ -304,7 +294,7 @@ function MainSceneManager(mainContainer, memorialContainer) {
 
     animateBbls = !animateBbls;
 
-    toggleModalBtns();
+    this.toggleModalBtns();
   }
 
   this.update = function() {

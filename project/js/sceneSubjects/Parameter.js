@@ -1,13 +1,19 @@
 function Parameter(label, container, array) {
 
+  var divElem = document.createElement('div');
+
+  var spanElem = document.createElement('span');
+
+  divElem.appendChild(spanElem);
+
   var button = {
-    elem: document.createElement('div'),
+    elem: divElem,
     array: array,
     label: label,
     state: "inactive"
   };
 
-  button.elem.innerHTML = button.label;
+  button.elem.children[0].innerHTML = button.label;
 
   container.appendChild(button.elem);
 

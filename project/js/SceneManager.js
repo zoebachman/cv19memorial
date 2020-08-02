@@ -1,14 +1,14 @@
 function SceneManager() {
 
-  var mainSceneContainer = document.getElementById("main-scene");
+  var mainSceneContainer = document.getElementById("main-world");
 
-  var memorialSceneContainer = document.getElementById("memorial-scene");
+  var memorialSceneContainer = document.getElementById("memorial-world");
 
   var mainSceneManager, memorialSceneManager;
 
   this.createScenes = function() {
 
-    mainSceneManager = new MainSceneManager(mainSceneContainer, memorialSceneContainer);
+    mainSceneManager = new MainSceneManager(mainSceneContainer);
 
     memorialSceneManager = new MemorialSceneManager(memorialSceneContainer);
 
@@ -28,11 +28,9 @@ function SceneManager() {
      }).done(createTestimonies);
   }
 
-  this.resetScenes = function() {
+  this.toggleFilterBtns = function() {
 
-    mainSceneManager.resetCamera();
-
-    memorialSceneManager.resetControls();
+    mainSceneManager.toggleModalBtns();
   }
 
   function createTestimonies(data) {
@@ -182,6 +180,13 @@ function SceneManager() {
 
       memorialSceneManager.setMemorialContent(testimony.memorialContent.getMemorialContent());
     }
+  }
+
+  this.resetScenes = function() {
+
+    mainSceneManager.resetCamera();
+
+    memorialSceneManager.resetControls();
   }
 
   this.update = function () {

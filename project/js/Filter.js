@@ -1,8 +1,10 @@
 function Filter(modal) {
 
-  var locationContainer = createDiv();
+  var filterContainer = createDiv(modal);
 
-  var typeContainer = createDiv();
+  var locationContainer = createDiv(filterContainer);
+
+  var typeContainer = createDiv(filterContainer);
 
   var locations = [];
 
@@ -34,11 +36,11 @@ function Filter(modal) {
     return buttons;
   }
 
-  function createDiv() {
+  function createDiv(container) {
 
     var paramContainer = document.createElement('div');
 
-    modal.appendChild(paramContainer);
+    container.appendChild(paramContainer);
 
     return paramContainer;
   }
