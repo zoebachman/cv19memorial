@@ -1,4 +1,4 @@
-<html lang="en">
+<html lang="<%= locale %>">
 
 <head>
   <% include ../helpers/head %>
@@ -9,86 +9,26 @@
     <% include ../helpers/menu %>
   </div>
 
-  <img
-    src="https://pro2-bar-s3-cdn-cf.myportfolio.com/ca16e2d4-5141-4b4f-904e-94137fc7d2b7/b699a858-1cc3-4706-b7eb-409b3c8cf8c4_rw_600.gif?h=434b01e3d55de542625f48913465f796"
-    width="360"
-    srcset="https://pro2-bar-s3-cdn-cf.myportfolio.com/ca16e2d4-5141-4b4f-904e-94137fc7d2b7/b699a858-1cc3-4706-b7eb-409b3c8cf8c4_rw_600.gif?h=434b01e3d55de542625f48913465f796 360w,"
-    sizes="(max-width: 360px) 100vw, 360px">
+  <div class="nav-container">
+    <div class="side-nav">
+      <a href="#Team">Team</a>
+      <a href="#Community-Advisory-Board">Community</a>
+      <a href="#Archive-Access">Archive Access</a>
+      <a href="#FAQ">FAQ</a>
+      <a href="#Contact">Contact</a>
+      <a href="#Legal">Legal</a>
+    </div>
+  </div>
 
-  <p>
-    <i>Para español, pulse <a>aquí</a></i>
-  </p>
+  <h1>About</h1>
 
-  <p>
-    cv19memorial is a digital space for collective grief during COVID-19. In a time marked by physical distance, we're
-    exploring ways of sharing pain transnationally through personal testimony. We invite you to add words, photos,
-    mementos about your grief and witness others' contributions. Our team recognizes that this crisis does not affect
-    all equally and is made worse for many through systemic inequality. We hope you will trust our commitment to sharing
-    your stories.
-  </p>
+  <div id="about-body">
+    <%- body %>
+  </div>
 
-  <h2>Our Values</h2>
-  <p>
-    <strong>Access</strong> to the means to mourn while physically distant<br>
-    <strong>Representation</strong> of the stories behind the statistics<br>
-    <strong>Transnationalism</strong> and solidarity during a shared trauma<br>
-    <strong>Collectivity</strong> of healing through transcultural observance<br>
-    <strong>Honesty</strong> in the portrayal of a crisis that has unequally impacted people<br>
-    <strong>Justice</strong> for the deceased and their families
-  </p>
-
-  <h2>Who We Are</h2>
-  <p>
-    We are a team of activists, artists, designers and researchers committed to human rights defense and with ample
-    experience in the development of memorials, participatory processes and interactive platforms. We live in Mexico,
-    the UK and USA. We are also people like you, deeply affected and grieving during the COVID-19 crisis who care about
-    telling this story.
-  </p>
-
-  <p>
-    Phoebe Bachman - <a href="https://zoebachman.net">Zoe Bachman</a> - <a href="https://ssbeltran.com">Sergio
-      Beltrán-García</a> - Leigh Brown - Tamara Jamil - <a href="https://www.timnottage.com/">Tim Nottage</a><br>
-    Will Qian - <a href="https://www.azaleavaseghi.com/">Azalea Vaseghi</a>
-  </p>
-
-  <h2>Partners</h2>
-  <p>
-    <img src="" /> <img src="" />
-  </p>
-
-  <h2>Data Protection</h2>
-  <p>
-    We are committed to taking care of your information and we are working to ensure that your stories will be stored in
-    secure servers with the highest standards in data protection practices. At no point will the data be used without
-    permission. It will never be sold.
-  </p>
-
-  <h2>FAQ</h2>
-  <p>
-    <strong>Not In Your Language?</strong>
-    Our team is working to offer this site in multiple languages. If you want to help with translations, reach out!
-    <strong>Want to get involved?</strong>
-    We're a small team volunteering to get this off the ground and could use assistance especially those with knowledge
-    of JavaScript (both front-end and server side) NoSQL and SQL, and or three.js.
-    <strong>Why is this for anyone and not just those who have passed?</strong>
-    COVID-19 has changed all of our lives - it is a shared grief. This is an space for acknowledging loss and trauma,
-    especially for those living under conditions of violence or injustice made deeper by COVID-19.
-  </p>
-
-  <h2>Further Thoughts?</h2>
-  <p>
-    We value your input in how best to build this shared memorial to both direct and indirect victims of COVID-19.
-    Please reach out if you have any thoughts or criticism as to how we can make this platform as inclusive and mindful
-    as possible.
-  </p>
-
-  <label for="name">Name:</label>
-  <input type="text" id="name" name="name">
-  <label for="email">Email address:</label>
-  <input type="text" id="email" name="email">
-  <label for="message">Message:</label>
-  <input type="text" id="message" name="message">
-
+  <div class="page-footer">
+    <% include ../helpers/footer %>
+  </div>
 </body>
 
 </html>

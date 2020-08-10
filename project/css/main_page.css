@@ -1,0 +1,153 @@
+/* OVERRIDES TO NAV */
+
+body {
+  max-width: 800px;
+  margin: auto;
+  font-family: freight-sans-pro, Arial, sans-serif;
+  /* background: white; */
+  color: #426282;
+  padding-top: 4rem;
+}
+
+.page-header {
+  position: fixed;
+  background: white;
+}
+
+.page-header a {
+  text-decoration: none;
+}
+
+/* PAGES (about, media, healing-voices) */
+
+h1, h2, h3, h4, h5 {
+  font-weight: 600;
+  font-style: italic;
+  color: #426282;
+}
+
+a {
+  text-decoration: none;
+  font-weight: 500;
+  font-style: italic;
+  color: #426282;
+}
+
+a:hover {
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* ABOUT PAGE */
+
+.nav-container {
+  position: relative;
+  /* paddingleft: 5rem; */
+}
+
+.side-nav {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  padding-top: 4rem;
+  /* padding-left: 2rem; */
+  /* width: 100%; */
+}
+
+#about-body {
+  position: relative;
+  left: 8rem;
+  max-width: 40rem;
+  padding-bottom: 5rem;
+}
+
+.partner-logo {
+  max-width: 15rem;
+  padding-left: 8rem;
+}
+
+/* GRID PAGES (media, healing-voices) */
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, 33%);
+  grid-template-rows: repeat(3, 33%);
+  column-gap: 6rem;
+  row-gap: 6rem;
+  padding-right: 10rem;
+}
+
+.card-img-top {
+ max-width: 18rem;
+}
+
+/* HEALING VOICES POST PAGES */
+
+.hv-post {
+  padding-right: 8rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.hv-post .container {
+  column-gap: 7rem;
+}
+
+audio {
+  align-content: center;
+}
+
+.hv-card-image {
+  max-width: 15rem;
+}
+
+
+/* NON-ENVIRONMENT NAV */
+
+nav {
+  font-style: italic;
+  display: flex;
+  justify-content: space-between;
+}
+
+.icon:hover {
+  fill: #42628294;
+  height: 30px;
+  opacity: 1;
+  width: 30px;
+  transition: fill 0.2s ease;
+}
+
+.link-transition {
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+svg {
+  fill: #426282;
+  height: 30px;
+  opacity: 1;
+  width: 30px;
+}
+
+svg:not(:root) {
+  overflow: hidden;
+}
+
+.social a {
+  display: block;
+  text-align: center;
+  background: transparent;
+}
+
+/* MAIN ENVIRONMENT */
+
+/* MEMORIAL INTERIOR */
+.personal_info h1,
+.personal_info h2,
+.personal_info h3,
+.personal_info h4,
+.personal_info h5 {
+  font-weight: 600;
+  font-style: italic;
+  color: white;
+}
