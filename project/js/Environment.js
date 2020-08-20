@@ -134,7 +134,7 @@ function Environment(container, envType) {
   }
 
   this.getAngle = function () {
-    
+
     var angle = controls.getAzimuthalAngle() * (180/Math.PI);
 
     if (angle <= 0) {
