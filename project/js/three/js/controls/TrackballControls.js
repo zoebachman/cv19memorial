@@ -22,7 +22,7 @@ THREE.TrackballControls = function ( object, domElement ) {
 
 	this.screen = { left: 0, top: 0, width: 0, height: 0 };
 
-	this.rotateSpeed = 1.0;
+	this.rotateSpeed = 7.0;
 	this.zoomSpeed = 1.2;
 	this.panSpeed = 0.3;
 
@@ -36,7 +36,7 @@ THREE.TrackballControls = function ( object, domElement ) {
 	this.minDistance = 0;
 	this.maxDistance = Infinity;
 
-	this.keys = [ 65 /*A*/, 83 /*S*/, 68 /*D*/ ];
+	this.keys = { LEFT: 37, UP: 38, RIGHT: 39, BOTTOM: 40 };
 
 	this.mouseButtons = { LEFT: THREE.MOUSE.ROTATE, MIDDLE: THREE.MOUSE.ZOOM, RIGHT: THREE.MOUSE.PAN };
 
@@ -404,36 +404,45 @@ THREE.TrackballControls = function ( object, domElement ) {
 
 		if ( _this.enabled === false ) return;
 
-		window.removeEventListener( 'keydown', keydown );
+		// window.removeEventListener( 'keydown', keydown );
 
-		if ( _keyState !== STATE.NONE ) {
+		// if ( _keyState !== STATE.NONE ) {
+		//
+		// 	return;
+		//
+		// } else
 
-			return;
+		if ( event.keyCode === _this.keys.LEFT ) {
 
-		} else if ( event.keyCode === _this.keys[ STATE.ROTATE ] && ! _this.noRotate ) {
+			_state = STATE.ROTATE;
+			_movePrev.copy( _moveCurr );
+			_moveCurr.copy( { x : _movePrev.x - 0.015 , y : _movePrev.y } );
 
-			_keyState = STATE.ROTATE;
+		} else if ( event.keyCode === _this.keys.RIGHT ) {
 
-		} else if ( event.keyCode === _this.keys[ STATE.ZOOM ] && ! _this.noZoom ) {
+			_state = STATE.ROTATE;
+			_movePrev.copy( _moveCurr );
+			_moveCurr.copy( { x : _movePrev.x + 0.015 , y : _movePrev.y } );
+
+		} else if ( event.keyCode === _this.keys.UP ) {
 
 			_keyState = STATE.ZOOM;
+			_this.object.translateZ( - 150 );
 
-		} else if ( event.keyCode === _this.keys[ STATE.PAN ] && ! _this.noPan ) {
+		} else if ( event.keyCode === _this.keys.BOTTOM ) {
 
-			_keyState = STATE.PAN;
-
+			_keyState = STATE.ZOOM;
+			_this.object.translateZ( 150 );
 		}
-
 	}
 
 	function keyup() {
 
 		if ( _this.enabled === false ) return;
 
-		_keyState = STATE.NONE;
+		// _keyState = STATE.NONE;
 
-		window.addEventListener( 'keydown', keydown, false );
-
+		// window.addEventListener( 'keydown', keydown, false );
 	}
 
 	function mousedown( event ) {

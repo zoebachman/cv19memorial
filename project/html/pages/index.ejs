@@ -5,10 +5,10 @@
     <link rel="stylesheet" href="https://use.typekit.net/kaq5whx.css">
     <link rel="stylesheet" href="/css/main_env.css">
     <link rel="stylesheet" href="/css/memorial_interior.css">
+    <script src="/socket.io/socket.io.js"></script>
     <script src="/js/three/build/three.js"></script>
     <script src="/js/three/js/controls/TrackballControls.js"></script>
     <script src="/js/three/js/controls/OrbitControls.js"></script>
-    <script src="/js/three/js/controls/DriftCamControls.js"></script>
     <script src="/js/three/js/renderers/CSS3DRenderer.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/16.3.5/Tween.min.js"></script>
     <script src="https://rawgit.com/farzher/fuzzysort/master/fuzzysort.js"></script>
@@ -47,12 +47,16 @@
       </div>
       <div id="main-directions" class="instructions">
         <div>
-          <p>drag with one finger to rotate, drag with two fingers to pan, and pinch to move in and out of the scene.</p>
+          <p>use the arrow keys or drag with one finger to rotate, drag with two fingers to pan, and pinch to move in and out of the scene.</p>
         </div>
         <div class="btn">continue</div>
       </div>
     </div>
     <div id="curtain"></div>
+    <div id="mourner-count" class="instructions">
+      <h1 id="count">0</h1>
+      <div>others are collectively mourning</div>
+    </div>
     <div id="logo-container">
       <div id="logo">
         <div></div>
