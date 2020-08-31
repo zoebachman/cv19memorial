@@ -526,11 +526,12 @@ THREE.OrbitControls = function ( object, domElement ) {
 			case scope.keys.RIGHT:
 				handleKeyDownRotate("right");
 				break;
+
 		}
 	}
 
 	function handleKeyDownRotate(direction) {
-		var newCoords = direction == "right" ? { x: rotateStart.x + scope.keyPanSpeed, y: rotateStart.y } : { x: rotateStart.x - scope.keyPanSpeed, y: rotateStart.y };
+		var newCoords = direction == "right" ? { x: rotateStart.x + scope.keyPanSpeed, y: rotateStart.y + scope.keyPanSpeed } : { x: rotateStart.x - scope.keyPanSpeed, y: rotateStart.y - scope.keyPanSpeed };
 		rotateEnd.set(newCoords.x, newCoords.y);
 		rotateDelta.subVectors( rotateEnd, rotateStart );
 

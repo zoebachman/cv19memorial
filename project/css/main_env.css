@@ -198,11 +198,7 @@ hr {
   transition: opacity 1s ease-in-out, visibility 0s linear 1s;
 }
 .instructions * {
-  margin: 0.5em 1em;
-}
-#mourner-count {
-  background: radial-gradient(#e2dbfd, #c3dcfd 100%);
-  color: #426282;
+  margin: 0.75em 1em;
 }
 #main-directions {
   background: radial-gradient(#e2dbfd, #c3dcfd 100%);

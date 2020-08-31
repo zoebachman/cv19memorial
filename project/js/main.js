@@ -1,4 +1,3 @@
-var mournerCount;
 var sceneManager;
 
 init();
@@ -6,24 +5,6 @@ init();
 function init () {
 
   window.onload = function() {
-
-    const socket = io('http://localhost:5000');
-
-    socket.on('mourners', function(data) {
-
-      mournerCount = document.getElementById("mourner-count");
-
-      if (data > 1) {
-
-        mournerCount.children[0].innerHTML = data - 1;
-
-        console.log( (data - 1) + " others are collectively mourning here now.");
-
-      } else {
-
-        fadeOut(mournerCount);
-      }
-    });
 
     loadScript('/js/SceneManager.js', function() {
 
@@ -134,12 +115,6 @@ function animateLogo() {
       clearInterval(animationInterval);
 
       fadeOut(logoContainer);
-
-      setInterval( function() {
-
-        fadeOut(mournerCount);
-
-      }, 3000);
     }
 
   }, 50);

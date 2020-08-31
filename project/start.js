@@ -3,7 +3,6 @@
 
 const express = require('express');
 const app = express();
-const PORT = 5000 || process.env.PORT;
 const locale = require('locale');
 const fs = require('fs');
 const md = require('markdown-it')({
@@ -13,15 +12,13 @@ const md = require('markdown-it')({
 }).use(require('markdown-it-front-matter'), function(fm) {
   console.log(fm);
 });
-const server = require('http').createServer(app);
-const io = require('socket.io')(server);
 
 const supportedLocales = [
   'en',
   'es'
 ]
 
-var mournerCount = 0;
+app.set('port', (process.env.PORT || 5000));
 
 // was causing wonkiness but now seems fine
 app.use(express.static(__dirname));
@@ -93,23 +90,6 @@ app.get('/media', function (request, response) {
   });
 });
 
-io.on('connection', socket => {
-
-  mournerCount += 1;
-
-  console.log("Client " + socket.id + " has connected. There are now " + mournerCount + " mourners.");
-
-  socket.emit('mourners', mournerCount);
-
-  socket.on('disconnect', function() {
-
-    mournerCount -= 1;
-
-		console.log("Client " + socket.id + " has disconnected. There are now " + mournerCount + " mourners.");
-	});
-});
-
-server.listen(PORT, function () {
-
-  console.log('Node app is running on port', PORT );
+app.listen(app.get('port'), function () {
+  console.log('Node app is running on port', app.get('port'));
 });
